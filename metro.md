@@ -68,8 +68,8 @@
 + set_weight(weight: int)
 
 + get_direction(): str
-+ add_direction(direction: Optional[str])
-+ remove_direction(direction:str)
++ add_direction(direction: str)
++ remove_direction(direction: str)
 
 + get_number_of_edge(cls): int
 + get_edge_list(cls): List[Edge]
