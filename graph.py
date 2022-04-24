@@ -24,7 +24,7 @@ class Graph:
             return None
 
     def add_node(self, number_of_node: int, name_of_node: str) -> NoReturn:
-        self.node_list[number_of_node] = name_of_node
+        self.node_list[number_of_node] = Node(number_of_node, name_of_node)
         self.number_of_node += 1
 
     def remove_node(self, number_of_node: int) -> Node:
@@ -33,8 +33,6 @@ class Graph:
         raise Exception("Node not exist in Graph")
 
     def add_edge(self, node1: int, node2: int, weight: int) -> Edge:
-        if not (isinstance(node1, Node) and isinstance(node2, Node)):
-            raise Exception("Invalid node")
         self.get_node(node1).add_connection(node2, self.get_node(node2))
         return Edge(self.get_node(node1), self.get_node(node2), weight)
 

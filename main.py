@@ -47,13 +47,13 @@ def pp(graph: Graph, vertex: Node, stations_ligne: List[Node], terminus):
 
     counter = 0
     liste_connected = []
-    for vertex_successor in vertex.connectedTo:
+    for vertex_successor in vertex:
         if vertex_successor.name != vertex.name:
             counter += 1
             liste_connected.append(vertex.name)
     if counter == 1:
         terminus.append(liste_connected)
-    for vertex_successor in vertex.connectedTo:
+    for vertex_successor in vertex:
         if vertex_successor.color == "white" and vertex_successor.name != vertex.name:
             pp(graph, vertex_successor, stations_ligne, terminus)
     return stations_ligne, terminus
@@ -67,15 +67,25 @@ def bfs(graph: Graph, node: Node) -> None:
     vertQueue.put(node)
     while (not vertQueue.empty()):
         currentVert = vertQueue.get()
-        for nbr in currentVert.getConnections():
-            if (nbr.getColor() == 'white'):
-                nbr.setColor('gray')
-                nbr.setPred(currentVert)
+        for nbr in currentVert:
+            if (nbr.get_color() == 'white'):
+                nbr.set_color('gray')
+                nbr.set_predecessor(currentVert)
                 vertQueue.put(nbr)
-        currentVert.setColor('black')
+        currentVert.set_color('black')
+
+
+def is_connexe(graph: Graph):
+    bfs(graph, graph.get_node(0))
+    for vertex in graph:
+        if vertex.color != "black":
+            return False
+    return True
 
 
 metro_parisien = init()
+print(is_connexe(metro_parisien))
+
 
 lignes = dfs(metro_parisien)
 for ligne, terminus in lignes:

@@ -44,19 +44,22 @@ class Node(object):
     def get_connections(self) -> List[int]:
         return self.connectedTo.keys()
 
-    def add_connection(self, number_of_node: int, connection) -> NoReturn:
-        self.connectedTo[number_of_node] = connection
+    def add_connection(self, number_of_node: int, connection: Any) -> NoReturn:
+        if isinstance(connection, Node):
+            if connection.id != number_of_node:
+                raise Exception("Id doen't match")
+            self.connectedTo[number_of_node] = connection
 
     def remove_connection(self, number_of_node: int):
         if number_of_node in self:
-            self.node_list.pop(number_of_node)
-        raise Exception("Node not exist in Graph")
+            self.connectedTo.pop(number_of_node)
+        raise Exception("Connection not exist in node")
 
     def __str__(self):
         return str(self.id) + ' connectedTo: ' + str([x.id for x in self.connectedTo])
 
     def __iter__(self):
-        return self.connectedTo.values()
+        return iter(self.connectedTo.values())
 
     def __contains__(self, number_of_node: int):
         return number_of_node in self.connectedTo.keys()
