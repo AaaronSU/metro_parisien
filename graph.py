@@ -23,12 +23,9 @@ class Graph:
         else:
             return None
 
-    def add_node(self, number_of_node: int, node: Node) -> NoReturn:
-        if not isinstance(node, Node):
-            raise Exception("Invalid node")
-        else:
-            self.node_list[number_of_node] = node
-            self.number_of_node += 1
+    def add_node(self, number_of_node: int, name_of_node: str) -> NoReturn:
+        self.node_list[number_of_node] = name_of_node
+        self.number_of_node += 1
 
     def remove_node(self, number_of_node: int) -> Node:
         if number_of_node in self:

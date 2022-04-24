@@ -3,11 +3,11 @@ import sys
 
 
 class Node(object):
-    def __init__(self, id: int, name: str, color: str):
+    def __init__(self, id: int, name: str):
         self.id: int = id
         self.name: str = name
-        self.color: str = color
-        self.predecessor: Optional[str] = None
+        self.color: str = "white"
+        self.predecessor: Optional[Any] = None
         self.distance: int = sys.maxsize
         self.connectedTo: Mapping[int, Any] = {}
 
@@ -29,10 +29,10 @@ class Node(object):
     def set_color(self, color: str) -> NoReturn:
         self.color = color
 
-    def get_predecessor(self) -> Optional[str]:
+    def get_predecessor(self) -> Optional[Any]:
         return self.predecessor
 
-    def set_predecessor(self, predecessor: str) -> NoReturn:
+    def set_predecessor(self, predecessor: Any) -> NoReturn:
         self.predecessor = predecessor
 
     def get_distance(self) -> int:
