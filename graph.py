@@ -38,7 +38,8 @@ class Graph:
     def add_edge(self, node1: int, node2: int, weight: int) -> Edge:
         if not (isinstance(node1, Node) and isinstance(node2, Node)):
             raise Exception("Invalid node")
-        return Edge(node1, node2, weight)
+        self.get_node(node1).add_connection(node2, self.get_node(node2))
+        return Edge(self.get_node(node1), self.get_node(node2), weight)
 
     def __contains__(self, number_of_node: int):
         return number_of_node in self.node_list.keys()

@@ -11,7 +11,7 @@ class Edge(object):
         self.starting_node: Node = starting_node
         self.arrival_node: Node = arrival_node
         self.weight: int = weight
-        self.direction: Optional[str] = direction
+        self.direction: Optional[List[str]] = direction
         Edge.edge_list.append(self)
 
     def get_starting_node(self) -> Node:
@@ -37,10 +37,18 @@ class Edge(object):
         self.weight = weight
 
     def get_direction(self) -> str:
-        return self.get_direction
+        return self.direction
 
-    def set_direction(self, direction: Optional[str]) -> NoReturn:
-        self.direction = direction
+    def add_direction(self, direction: str) -> NoReturn:
+        if not self.direction:
+            self.direction = [direction]
+        else:
+            self.direction.append(direction)
+
+    def remove_direction(self, direction: str):
+        if direction not in self.direction:
+            raise Exception("Direction doesn't exist in edge")
+        self.direction.remove(direction)
 
     @classmethod
     def get_number_of_edge(cls) -> int:

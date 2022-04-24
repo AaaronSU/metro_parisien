@@ -1,14 +1,17 @@
-from typing import List, Iterator, Mapping, NoReturn, Optional
+from typing import Any, List, Iterator, Mapping, NoReturn, Optional
 from node import Node
 
 
 class Line(object):
+    line_list: Mapping[str, Any] = []
+
     def __init__(self, numero: str, color: str):
         self.numero: str = numero
         self.color: str = color
         self.node_list: Mapping[int: Node] = {}
         self.number_of_node: int = 0
         self.terminus: Mapping[int: Node] = {}
+        Line.line_list.append(self)
 
     def get_numero(self) -> int:
         return self.numero
@@ -67,6 +70,10 @@ class Line(object):
         if number_of_node in self:
             return self.terminus.pop(number_of_node)
         raise Exception("Node doesn't exist in terminus of the line")
+
+    @classmethod
+    def get_line_list(cls) -> Mapping[str, Any]:
+        return cls.line_list
 
     def __iter__(self):
         return iter(self.node_list.values())
