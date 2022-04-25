@@ -56,7 +56,7 @@ class Node(object):
         raise Exception("Connection not exist in node")
 
     def __str__(self):
-        return str(self.id) + ' connectedTo: ' + str([x.id for x in self.connectedTo])
+        return str(self.id) + ' connectedTo: ' + str([x.id for x in self])
 
     def __iter__(self):
         return iter(self.connectedTo.values())
