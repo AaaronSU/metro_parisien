@@ -17,7 +17,7 @@ class Graph:
     def get_nodes(self) -> List[int]:
         return self.node_list.keys()
 
-    def get_node(self, number_of_node) -> Optional[Node]:
+    def get_node(self, number_of_node: int) -> Optional[Node]:
         if number_of_node in self:
             return self.node_list[number_of_node]
         else:

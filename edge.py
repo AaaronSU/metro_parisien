@@ -1,4 +1,4 @@
-from typing import Any, List, NoReturn, Optional
+from typing import Any, List, NoReturn, Optional, Tuple
 from node import Node
 
 
@@ -49,6 +49,33 @@ class Edge(object):
         if direction not in self.direction:
             raise Exception("Direction doesn't exist in edge")
         self.direction.remove(direction)
+
+    @classmethod
+    def get_connections_of_node(cls, node: Node) -> List[Tuple[Node, int, Optional[str]]]:
+        list_connection = []
+        for edge in cls:
+            if edge.starting_node == node:
+                list_connection.append(
+                    (edge.arrival_node, edge.weight, edge.direction))
+        return list_connection
+
+    @staticmethod
+    def get_weight_of_nodes(starting_node: Node, arrival_node: Node) -> Optional[int]:
+        if not (isinstance(starting_node, Node) and isinstance(arrival_node, Node)):
+            raise Exception("Invalid node")
+        for edge in Edge.get_edge_list():
+            if edge.starting_node == starting_node and edge.arrival_node == arrival_node:
+                return edge.weight
+        raise Exception("Edge doesn't exist in the list of Edges")
+
+    @staticmethod
+    def get_direction_of_nodes(starting_node: Node, arrival_node: Node) -> Optional[str]:
+        if not (isinstance(starting_node, Node) and isinstance(arrival_node, Node)):
+            raise Exception("Invalid node")
+        for edge in Edge.get_edge_list():
+            if edge.starting_node == starting_node and edge.arrival_node == arrival_node:
+                return edge.direction
+        raise Exception("Edge doesn't exist in the list of Edges")
 
     @classmethod
     def get_number_of_edge(cls) -> int:

@@ -71,6 +71,10 @@
 + add_direction(direction: str)
 + remove_direction(direction: str)
 
++ get_connections_of_node(cls, node: Node): List[Tuple[Node, int, Optional[str]]]
++ get_weight_of_nodes(cls, starting_node: Node, arrival_node: Node): Optinal[int]
++ get_direction_of_nodes(cls, starting_node: Node, arrival_node: Node): Optional[str]
+
 + get_number_of_edge(cls): int
 + get_edge_list(cls): List[Edge]
 
