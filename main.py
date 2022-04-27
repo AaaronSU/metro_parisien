@@ -1,5 +1,4 @@
-import sys
-from typing import List
+from typing import List, Mapping, NoReturn, Optional
 from metro_line import Line
 from queue import PriorityQueue, Queue
 from graph import Graph
@@ -28,32 +27,32 @@ def init():
     return graph
 
 
-def dfs(graph: Graph):
+def get_metro_lines(graph: Graph):
     for vertex in graph:
         vertex.color = "white"
-    dico = []
+    lines = []
     for vertex in graph:
         stations_ligne = {}
-        terminus = []
+        terminus = {}
         if vertex.color == "white":
             stations_ligne, terminus = pp(
                 graph, vertex, stations_ligne, terminus)
-            dico.append([stations_ligne, terminus])
-    return dico
+            lines.append([stations_ligne, terminus])
+    return lines
 
 
-def pp(graph: Graph, vertex: Node, stations_ligne: List[Node], terminus):
-    stations_ligne[vertex.name] = vertex
+def pp(graph: Graph, vertex: Node, stations_ligne: Mapping[int, Node], terminus: Mapping[int, Node]):
+    stations_ligne[vertex.id] = vertex
     vertex.color = "black"
 
     counter = 0
-    liste_connected = []
+    liste_connected = {}
     for vertex_successor in vertex:
         if vertex_successor.name != vertex.name:
             counter += 1
-            liste_connected.append(vertex.name)
+            liste_connected[vertex.id] = vertex
     if counter == 1:
-        terminus.append(liste_connected)
+        terminus.update(liste_connected)
     for vertex_successor in vertex:
         if vertex_successor.color == "white" and vertex_successor.name != vertex.name:
             pp(graph, vertex_successor, stations_ligne, terminus)
@@ -107,21 +106,98 @@ def dijkstra(graph: Graph, start_node: Node):
                 if new_cost < old_cost:
                     pq.put((new_cost, neighbor))
                     dico[neighbor] = new_cost
+                    neighbor.set_predecessor(current_vertex)
     return dico
 
 
-"""metro_parisien = init()
+def find_shortest_path(graph: Graph, start_node: int, destination: int) -> Optional[List[int]]:
+    dico = dijkstra(graph, graph.get_node(start_node))
+    total_second = dico[graph.get_node(destination)]
+    liste = [destination]
+
+    while graph.get_node(destination).get_predecessor():
+        destination = graph.get_node(destination).get_predecessor().get_id()
+        liste = [destination] + liste
+
+    return liste, total_second
+
+
+def initialize_metro_lines(graph: Graph) -> NoReturn:
+    lines_info = [
+        ("12", "#007852"),
+        ("2", "#003CA6"),
+        ("9", "#B6BD00"),
+        ("4", "#CF009E"),
+        ("3", "#837902"),
+        ("1", "#FFCD00"),
+        ("11", "#704B1C"),
+        ("7", "#FA9ABA"),
+        ("10", "#C9910D"),
+        ("13", "#6EC4E8"),
+        ("5", "#FF7E2E"),
+        ("8", "#E19BDF"),
+        ("6", "#6ECA97"),
+        ("14", "#62259D"),
+        ("7b", "#6ECA97"),
+        ("3b", "#6EC4E8")
+    ]
+    metro_lines = get_metro_lines(graph)
+    for index in range(len(lines_info)):
+        line = Line(*lines_info[index])
+        line_stations, terminus_list = metro_lines[index]
+        for station in line_stations:
+            line.add_node(station, line_stations[station])
+        for terminus in terminus_list:
+            line.add_terminus(terminus, terminus_list[terminus])
+    # à ajouter le terminus pour une ligne de métro
+    return Line.get_line_list()
+
+
+metro_parisien = init()
 print(is_connexe(metro_parisien))
 
 
-lignes = dfs(metro_parisien)
-for ligne, terminus in lignes:
-    print(terminus)
-    print({vertex.id: station for station, vertex in ligne.items()})
-    print()"""
+lines = initialize_metro_lines(metro_parisien)
+
+counter = 0
+q = Queue()
+for line in lines:
+    for terminus in line.get_terminus_nodes():
+        q.put(terminus)
+        marked = [terminus]
+        while not q.empty():
+            station = q.get()
+            for successeur in station:
+                if successeur.name != station.name and successeur not in marked:
+                    q.put(successeur)
+                    marked.append(successeur)
+                    edge = Edge.get_connection_between_nodes(
+                        successeur, station)
+                    edge.add_direction(terminus.name)
 
 
-uvsq = Graph()
+"""q = Queue()
+counter = 0
+for line in lines:
+    for terminus in line.get_terminus_nodes():
+        q.put(terminus)
+        while not q.empty():
+            station = q.get()
+            for successeur in station:
+                for edge in Edge.get_edge_list():
+                    start_node = edge.get_starting_node()
+                    end_node = edge.get_arrival_node()
+                    if start_node.name == successeur.name and end_node.name == station.name and successeur.get_id() in line and start_node.name != end_node.name:
+                        counter += 1
+                        print(counter)
+                        edge.add_direction(terminus)
+                        q.put(successeur)
+
+"""
+for edge in Edge.get_edge_list():
+    print(edge)
+
+"""uvsq = Graph()
 uvsq.add_node(1, "source")
 uvsq.add_node(2, "s2")
 uvsq.add_node(3, "s3")
@@ -141,5 +217,5 @@ uvsq.add_edge(3, 5, 2)
 uvsq.add_edge(5, 6, 3)
 uvsq.add_edge(4, 6, 7)
 
-dico = dijkstra(uvsq, uvsq.get_node(1))
-print(dico[uvsq.get_node(6)])
+print(find_shortest_path(uvsq, 1, 6))
+"""
