@@ -3,6 +3,26 @@ import sys
 
 
 class Node(object):
+    """
+    Class qui représente un noeud ( un sommet )
+
+    Attributs : 
+    id  : int 
+        Identifiant du noeud
+    name : str
+        Nom du noeud 
+    color : str 
+        Couleur du noeud, par défault blanc
+    predecessor : Node
+        ????
+    distance : int 
+        ????
+    connectedTo : dictionnaire (clée : ID noeuds, valeur : Node)
+        Noeuds connectés 
+
+
+    """
+
     def __init__(self, id: int, name: str):
         self.id: int = id
         self.name: str = name
