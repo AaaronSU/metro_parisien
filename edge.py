@@ -3,9 +3,36 @@ from node import Node
 
 
 class Edge(object):
+    """
+    Class qui représente un Edge (une liaison entre deux noeuds : une arrête)
+    --------
+
+    Attribut de la class Edge :
+
+    edge_list: List
+        Liste de tous les liaisons (Edge) entre deux noeuds
+    -------
+
+    Attributs :
+
+    starting_node: Node
+        Noeuds de départ
+    arrival_node: Node
+        Noeuds d'arrivé
+    weight: int
+        Poids de la liaison : distance entre les deux noeuds
+    direction: None ou List[str]
+        ????
+
+    """
+
     edge_list: List = []
 
     def __init__(self, starting_node: Node, arrival_node: Node, weight: int, direction: Optional[str] = None):
+        """
+        Constructeur de la class Edge
+        Rélève une execption si starting_node et arrival_node ne sont pas des instances de la class Node
+        """
         if (not isinstance(starting_node, Node)) or (not isinstance(arrival_node, Node)):
             raise Exception("Invalid node for initialization")
         self.starting_node: Node = starting_node
@@ -15,43 +42,131 @@ class Edge(object):
         Edge.edge_list.append(self)
 
     def get_starting_node(self) -> Node:
+        """
+        Getteur starting_node
+
+            Parametre :
+                None 
+
+            Retourne :
+                self.starting_node (Node) : Noeud de départ 
+        """
         return self.starting_node
 
     def set_starting_node(self, node: Node) -> NoReturn:
+        """
+        Setteur starting_node
+        Rélève une exception si starting_node n'est pas une instance de la class Node
+
+            Parametre :
+                starting_node (Node) : Nouveau noeud de départ
+
+            Retourne : 
+                None
+        """
         if not isinstance(node, Node):
             raise Exception("Invalid node")
         self.starting_node = node
 
     def get_arrival_node(self) -> Node:
+        """
+        Getteur arrival_node
+
+            Parametre :
+                None 
+
+            Retourne :
+                self.arrival_node (Node) : Noeud d'arrivé
+        """
         return self.arrival_node
 
     def set_arrival_node(self, node: Node) -> NoReturn:
+        """
+        Setteur arrival_node
+        Rélève une exception si starting_node n'est pas une instance de la class Node
+
+            Parametre :
+                arrival_node (Node) : Nouveau noeud d'arrivé
+
+            Retourne : 
+                None
+        """
         if not isinstance(node, Node):
             raise Exception("Invalid node")
         self.arrival_node = node
 
     def get_weight(self) -> int:
+        """
+        Getteur weight
+
+            Parametre :
+                None 
+
+            Retourne :
+                self.weight (int) : Poids du edge, distance entre deux noeuds
+        """
         return self.weight
 
     def set_weight(self, weight: int) -> NoReturn:
+        """
+        Setteur weight
+
+            Parametre :
+                self.weight (int) : Nouveau poids du edge, distance entre deux noeuds
+
+            Retourne :
+                None
+        """
         self.weight = weight
 
     def get_direction(self) -> str:
+        """
+        Getteur direction
+
+            Parametre :
+                None 
+
+            Retourne :
+                self.direction (str) :  ???
+        """
         return self.direction
 
     def add_direction(self, direction: str) -> NoReturn:
+        """
+        S'il n'y a aucune ????
+        ??? 
+
+            Parametre :
+                direction (str) : ???
+            
+            Retourne : 
+                None 
+        """
         if not self.direction:
             self.direction = [direction]
         else:
             self.direction.append(direction)
 
     def remove_direction(self, direction: str):
+        """
+        Supprime une direction  ????
+        Rélève une exception si la direction n'existe pas dans le edge
+        
+            Parametre :
+                direction (str) : ??? 
+            
+            Retourne : 
+                None
+        """
         if direction not in self.direction:
             raise Exception("Direction doesn't exist in edge")
         self.direction.remove(direction)
 
     @classmethod
     def get_connection_between_nodes(cls, start_node: Node, end_node: Node) -> Any:
+        """
+        
+        """
         for edge in Edge.get_edge_list():
             if edge.starting_node == start_node and edge.arrival_node == end_node:
                 return edge
