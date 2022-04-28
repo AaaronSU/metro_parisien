@@ -3,7 +3,7 @@ from node import Node
 
 
 class Line(object):
-    line_list: Mapping[str, Any] = []
+    line_list: Mapping[str, Any] = {}
 
     def __init__(self, numero: str, color: str):
         self.numero: str = numero
@@ -11,7 +11,7 @@ class Line(object):
         self.node_list: Mapping[int: Node] = {}
         self.number_of_node: int = 0
         self.terminus: Mapping[int: Node] = {}
-        Line.line_list.append(self)
+        Line.line_list[numero] = self
 
     def get_numero(self) -> int:
         return self.numero
@@ -28,8 +28,8 @@ class Line(object):
     def get_nodes(self) -> List[int]:
         return self.node_list.keys()
 
-    def get_node(self, number_of_node) -> Optional[Node]:
-        if number_of_node in self:
+    def get_node(self, number_of_node: int) -> Optional[Node]:
+        if number_of_node in self.get_nodes():
             return self.node_list[number_of_node]
         else:
             return None
@@ -37,6 +37,7 @@ class Line(object):
     def add_node(self, number_of_node: int, node: Node) -> NoReturn:
         if not isinstance(node, Node):
             raise Exception("Invalid node")
+        node.set_line(self.numero)
         self.node_list[number_of_node] = node
         self.number_of_node += 1
 
@@ -75,8 +76,22 @@ class Line(object):
     def get_line_list(cls) -> Mapping[str, Any]:
         return cls.line_list
 
+    @classmethod
+    def get_line_number(cls) -> List[str]:
+        return cls.line_list.keys()
+
+    @classmethod
+    def get_line_nodes(cls) -> List[Any]:
+        return cls.line_list.values()
+
+    @classmethod
+    def get_line_stations(cls, line_number: str) -> Optional[List[Node]]:
+        if line_number in Line.get_line_number():
+            return Line.line_list[line_number]
+        return None
+
     def __iter__(self):
         return iter(self.node_list.values())
 
     def __contains__(self, number_of_node):
-        return number_of_node in self.get_node()
+        return number_of_node in self.get_nodes()

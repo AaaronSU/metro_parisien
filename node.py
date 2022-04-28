@@ -1,6 +1,8 @@
 from typing import Mapping, NoReturn, Optional, List, Any
 import sys
 
+from pyparsing import line
+
 
 class Node(object):
     def __init__(self, id: int, name: str):
@@ -9,6 +11,7 @@ class Node(object):
         self.color: str = "white"
         self.predecessor: Optional[Any] = None
         self.distance: int = sys.maxsize
+        self.line: str = None
         self.connectedTo: Mapping[int, Any] = {}
 
     def get_id(self) -> int:
@@ -40,6 +43,12 @@ class Node(object):
 
     def set_distance(self, distance: int) -> NoReturn:
         self.distance = distance
+
+    def get_line(self) -> Optional[str]:
+        return self.line
+
+    def set_line(self, line: str) -> NoReturn:
+        self.line = line
 
     def get_connections(self) -> List[int]:
         return self.connectedTo.keys()
