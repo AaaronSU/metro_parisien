@@ -122,7 +122,7 @@ class Node(object):
             Retourne:
             ---------
                 predecessor (Node): prédécesseur du noeud 
-                None: Si aucun prédécesseur
+                None: Aucun prédécesseur
         """
         return self.predecessor
 
@@ -193,10 +193,10 @@ class Node(object):
 
     def remove_connection(self, number_of_node: int):
         """ 
-        Supprime le noeud x, ayant ID number_of_node, de connectedTo du noeud (self)
+        Supprime le noeud x, ayant pour ID number_of_node, de connectedTo du noeud (self)
         Rélève une exception si le number_of_node n'est pas dans connectedTo
         ---------
-            Parametre:
+            Paramètre:
             ---------
                 number_of_node (int): Identifiant du noeud connecté
 
