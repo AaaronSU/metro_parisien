@@ -22,8 +22,6 @@ class Edge(object):
     weight: int
         Poids de la liaison : distance entre les deux noeuds
     direction: None ou List[str]
-        ????
-
     """
 
     edge_list: List = []
@@ -138,7 +136,7 @@ class Edge(object):
 
             Parametre :
                 direction (str) : ???
-            
+
             Retourne : 
                 None 
         """
@@ -151,10 +149,10 @@ class Edge(object):
         """
         Supprime une direction  ????
         Rélève une exception si la direction n'existe pas dans le edge
-        
+
             Parametre :
                 direction (str) : ??? 
-            
+
             Retourne : 
                 None
         """
@@ -165,7 +163,7 @@ class Edge(object):
     @classmethod
     def get_connection_between_nodes(cls, start_node: Node, end_node: Node) -> Any:
         """
-        
+
         """
         for edge in Edge.get_edge_list():
             if edge.starting_node == start_node and edge.arrival_node == end_node:
