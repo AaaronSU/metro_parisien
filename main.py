@@ -146,7 +146,7 @@ def is_connexe(graph: Graph) -> bool:
     return True
 
 
-def dijkstra(graph: Graph, start_node: int) -> Mapping[int: Union[float, int]]:
+def dijkstra(graph: Graph, start_node: int):
     """
     L'implémentation de l'algorithme de Dijkstra permettant de trouver le plus court chemin d'un point aux tous les autres points.
         ---------
@@ -184,7 +184,7 @@ def dijkstra(graph: Graph, start_node: int) -> Mapping[int: Union[float, int]]:
     return dico
 
 
-def find_shortest_path(graph: Graph, start_node: int, destination: int) -> Sequence[List[int], int]:
+def find_shortest_path(graph: Graph, start_node: int, destination: int):
     """
     En récupérant le dictionnaire retourné par l'algorithme de Dijkstra avec start_node, trouver le plus chemin pour aller de la destination en remontant dans le prédécesseur de la destination
         ---------
