@@ -208,7 +208,4 @@ class Edge(object):
         return iter(Edge.edge_list)
 
     def __str__(self):
-        return f"The class Edge contains about {Edge.get_number_of_edge()} on total, which are {Edge.get_edge_list()}"
-
-    def __str__(self):
         return f"C'est un arc qui pars de {self.starting_node.name} et qui arrive à {self.arrival_node.name}, direction {self.direction} avec un poids de {self.weight}"
