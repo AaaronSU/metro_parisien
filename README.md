@@ -20,7 +20,7 @@ Python utilise la programmation orientée objet et la programmation fonctionnell
 Dans la documentation nous allons voir d'abord les structures de données que nous avons choisi. Elles ont était implémenté en classe.Puis,les fonctions que nous avons programmé grâce à nos structure de données. Pour finir, nous allons voir les améliorations que nous pouvons apporter en plus sur le projet.
 
 
-# Sommaire
+## Sommaire
 
 - [Structure des données](#structure-de-données)
     - [Graph](#graph)<br>
@@ -225,7 +225,7 @@ De même que les terminus sont ajoutés par la fonction add_terminus() et suppri
 + node_list: Mapping[int: Node]
 + number_of_node: int
 + terminus: Mapping[int: Node]
----
+
 #### Méthodes
 
 + get_numero(): int:
