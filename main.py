@@ -259,7 +259,7 @@ def describe_trajet(graph: Graph, trajet: List[int], total_second: int):
             line = graph.get_node(trajet[i]).get_line()
     if len(trajet) > 1:
         edge = Edge.get_connection_between_nodes(
-                    graph.get_node(trajet[-2]), graph.get_node(trajet[-1]))
+            graph.get_node(trajet[-2]), graph.get_node(trajet[-1]))
         station_line = graph.get_node(trajet[i-2]).get_line()
         list_directions = "/".join(edge.get_direction())
     print("A %s, changez et prenez la ligne %s direction %s." %
@@ -268,6 +268,8 @@ def describe_trajet(graph: Graph, trajet: List[int], total_second: int):
     if total_second % 60:
         second = " et %s seconde" % (
             total_second % 60) + "s" if total_second % 60 > 0 else "" + "."
+    else:
+        second = ""
     print("Vous devriez arriver à %s dans %s minutes%s" %
           (graph.get_node(trajet[-1]).get_name(), total_second//60, second))
 

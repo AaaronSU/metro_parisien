@@ -8,7 +8,6 @@ class Edge(object):
     Liaison entre deux stations de ligne de métro
     --------
 
-<<<<<<< HEAD
     Attribut de la class Edge :
 
     edge_list: List
@@ -24,23 +23,6 @@ class Edge(object):
     weight: int
         Poids de la liaison : distance entre les deux noeuds
     direction: None ou List[str]
-=======
-    Attribut de la class Edge:
-    ---------
-        edge_list: List
-            Liste de tous les instances de la class Edge crée
-
-    Attributs: 
-    ---------
-        starting_node: Node
-            Station de départ
-        arrival_node: Node
-            Station d'arrivé
-        weight: int
-            Poids de la liaison: distance entre deux stations
-        direction: None ou List[str]
-            ?????? 
->>>>>>> f662777bac116ef2885c24fb989401fc36db61aa
     """
 
     edge_list: List = []
@@ -161,7 +143,7 @@ class Edge(object):
             Retourne : 
                 None 
 =======
-            
+
             Retourne: Aucun retour
 >>>>>>> f662777bac116ef2885c24fb989401fc36db61aa
         """
@@ -186,7 +168,7 @@ class Edge(object):
             Paramètre:
             ---------
                 direction (str) : ??? 
-            
+
             Retourne: Aucun retour
 >>>>>>> f662777bac116ef2885c24fb989401fc36db61aa
         """
@@ -206,7 +188,7 @@ class Edge(object):
             ---------
                 start_node (Node):
                 end_node (Node):
-            
+
             Retourne:
             ---------
                 edge (Edge): instance de la class Edge correcpondant
@@ -224,7 +206,7 @@ class Edge(object):
             Paramètre: 
             ---------
                 node (Node): ????
-            
+
             Retourne:
             ---------
                 list_connection (List[Tuple[Node, int, Optional[str]]]) : ???
