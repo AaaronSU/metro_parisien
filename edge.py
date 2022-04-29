@@ -138,7 +138,7 @@ class Edge(object):
             Paramètre:
             ---------
                 direction (str) : ???
-            
+
             Retourne: Aucun retour
         """
         if not self.direction:
@@ -154,7 +154,7 @@ class Edge(object):
             Paramètre:
             ---------
                 direction (str) : ??? 
-            
+
             Retourne: Aucun retour
         """
         if direction not in self.direction:
@@ -170,7 +170,7 @@ class Edge(object):
             ---------
                 start_node (Node):
                 end_node (Node):
-            
+
             Retourne:
             ---------
                 edge (Edge): instance de la class Edge correcpondant
@@ -182,15 +182,15 @@ class Edge(object):
     @classmethod
     def get_connections_of_node(cls, node: Node) -> List[Tuple[Node, int, Optional[str]]]:
         """
-        ??????
+        Retourner tous les liaisons avec le node en entrée
         ---------
             Paramètre: 
             ---------
-                node (Node): ????
-            
+                node (Node): adresse du noeud
+
             Retourne:
             ---------
-                list_connection (List[Tuple[Node, int, Optional[str]]]) : ???
+                list_connection (List[Tuple[Node, int, Optional[str]]]) : La liste des liaison sous la forme [noeud_arrivé, poids, direction]
         """
         list_connection = []
         for edge in cls:
@@ -201,6 +201,18 @@ class Edge(object):
 
     @staticmethod
     def get_weight_of_nodes(starting_node: Node, arrival_node: Node) -> Optional[int]:
+        """
+        En prenant deux noeuds, retourner le poids de la liaison entre deux noeuds
+        ---------
+            Paramètre: 
+            ---------
+                starting_node: adresse du noeud de départ
+                arrival_node: adresse du noeud d'arrivée
+
+            Retourne:
+            ---------
+                list_connection (List[Tuple[Node, int, Optional[str]]])
+        """
         if not (isinstance(starting_node, Node) and isinstance(arrival_node, Node)):
             raise Exception("Invalid node")
         for edge in Edge.get_edge_list():
@@ -210,6 +222,18 @@ class Edge(object):
 
     @staticmethod
     def get_direction_of_nodes(starting_node: Node, arrival_node: Node) -> Optional[str]:
+        """
+        En prenant deux noeuds, retourner la direction de la liaison entre 2 sommets
+        ---------
+            Paramètre: 
+            ---------
+                starting_node (Node): adresse du noeud de départ
+                arrival_node (Node): adresse du noeud d'arrivée
+
+            Retourne:
+            ---------
+                La direction du noeud (str ou None)
+        """
         if not (isinstance(starting_node, Node) and isinstance(arrival_node, Node)):
             raise Exception("Invalid node")
         for edge in Edge.get_edge_list():
@@ -219,10 +243,24 @@ class Edge(object):
 
     @classmethod
     def get_number_of_edge(cls) -> int:
+        """
+        Retourner le nombre total des liaisons dans la classe Edge
+        ---------
+            Retourne:
+            ---------
+                le nombre total des liaisons (int)
+        """
         return len(cls.edge_list)
 
     @classmethod
     def get_edge_list(cls) -> List[Any]:
+        """
+        Retourner la liste des adresses des liaisons
+        ---------
+            Retourne:
+            ---------
+                les adresses des liaisons: List[Edge]
+        """
         return cls.edge_list
 
     def __iter__(self):
