@@ -10,6 +10,15 @@ from edge import Edge
 
 
 def init():
+    """
+    Cré le graphe du réseau métro parisien d'après les données du fichier "metro.txt"
+    --------- 
+        Paramètre: Aucun paramètre nécessaire
+
+        Retourne:
+        ---------
+            graph (Graph): graphe du métro parisien
+    """
     graph = Graph()
     with open('metro.txt', 'r') as f:
         while 1:
@@ -31,6 +40,17 @@ def init():
 
 
 def get_metro_lines(graph: Graph):
+    """
+    Crée des lignes de métro d'après un graphe
+    --------- 
+        Paramètre:
+        ---------
+            graph (Graph): graphe répresentant un réseau métro
+
+        Retourne:
+        ---------
+            lines (List): liste des stations de métro composant la ligne de métro
+    """
     for vertex in graph:
         vertex.color = "white"
     lines = []
@@ -45,6 +65,21 @@ def get_metro_lines(graph: Graph):
 
 
 def pp(graph: Graph, vertex: Node, stations_ligne: Mapping[int, Node], terminus: Mapping[int, Node]):
+    """
+    pp : Parcours en profondeur
+    Permet de faire le parcours en profondeur d'un graphe
+    --------- 
+        Paramètre:
+        ---------
+            graph (Graph): graphe répresantant un réseau metro
+            vertex (Node): station de métro 
+            stations_ligne (Mapping[int, Node]): 
+            terminus (Mapping[int, Node]): 
+        Retourne:
+        --------
+            stations_ligne: 
+            terminus: graphe du métro parisien
+    """
     stations_ligne[vertex.id] = vertex
     vertex.color = "black"
 
@@ -234,6 +269,19 @@ def get_station(message: str):
 
 
 def describe_trajet(graph: Graph, trajet: List[int], total_second: int):
+    """
+    Crée le graphe du réseau métro parisien d'après les données du fichier "metro.txt"
+    --------- 
+        Paramètre:
+        --------- 
+        graph (Graph):
+        trajet (List[int]):
+        total_second (int):
+
+        Retourne:
+        ---------
+            graph (Graph): graphe du métro parisien
+    """
     while len(trajet) > 1 and graph.get_node(trajet[0]).get_name() == graph.get_node(trajet[1]).get_name():
         trajet = trajet[1:]
     print(f"Vous êtes à {graph.get_node(trajet[0]).get_name()}.")
