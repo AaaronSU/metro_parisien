@@ -8,6 +8,23 @@ class Edge(object):
     Liaison entre deux stations de ligne de métro
     --------
 
+<<<<<<< HEAD
+    Attribut de la class Edge :
+
+    edge_list: List
+        Liste de tous les liaisons (Edge) entre deux noeuds
+    -------
+
+    Attributs :
+
+    starting_node: Node
+        Noeuds de départ
+    arrival_node: Node
+        Noeuds d'arrivé
+    weight: int
+        Poids de la liaison : distance entre les deux noeuds
+    direction: None ou List[str]
+=======
     Attribut de la class Edge:
     ---------
         edge_list: List
@@ -23,6 +40,7 @@ class Edge(object):
             Poids de la liaison: distance entre deux stations
         direction: None ou List[str]
             ?????? 
+>>>>>>> f662777bac116ef2885c24fb989401fc36db61aa
     """
 
     edge_list: List = []
@@ -138,8 +156,18 @@ class Edge(object):
             Paramètre:
             ---------
                 direction (str) : ???
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+            Retourne : 
+                None 
+=======
+            
+>>>>>>> e6658b1651a25bbd9fb9e0594d55f64ca9b24f72
             Retourne: Aucun retour
+>>>>>>> f662777bac116ef2885c24fb989401fc36db61aa
         """
         if not self.direction:
             self.direction = [direction]
@@ -150,12 +178,21 @@ class Edge(object):
         """
         Supprime une direction  ????
         Rélève une exception si la direction n'existe pas dans le edge
+<<<<<<< HEAD
+
+            Parametre :
+                direction (str) : ??? 
+
+            Retourne : 
+                None
+=======
         ---------
             Paramètre:
             ---------
                 direction (str) : ??? 
 
             Retourne: Aucun retour
+>>>>>>> f662777bac116ef2885c24fb989401fc36db61aa
         """
         if direction not in self.direction:
             raise Exception("Direction doesn't exist in edge")
@@ -164,6 +201,9 @@ class Edge(object):
     @classmethod
     def get_connection_between_nodes(cls, start_node: Node, end_node: Node) -> Any:
         """
+<<<<<<< HEAD
+
+=======
         Prends deux noeuds et renvoie la liaison entre les deux
         ---------
             Paramètre: 
@@ -174,6 +214,7 @@ class Edge(object):
             Retourne:
             ---------
                 edge (Edge): instance de la class Edge correcpondant
+>>>>>>> f662777bac116ef2885c24fb989401fc36db61aa
         """
         for edge in Edge.get_edge_list():
             if edge.starting_node == start_node and edge.arrival_node == end_node:
@@ -265,9 +306,6 @@ class Edge(object):
 
     def __iter__(self):
         return iter(Edge.edge_list)
-
-    def __str__(self):
-        return f"The class Edge contains about {Edge.get_number_of_edge()} on total, which are {Edge.get_edge_list()}"
 
     def __str__(self):
         return f"C'est un arc qui pars de {self.starting_node.name} et qui arrive à {self.arrival_node.name}, direction {self.direction} avec un poids de {self.weight}"

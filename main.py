@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+import time
 from os import system, name
 from typing import List, Mapping, NoReturn, Optional
 from metro_line import Line
@@ -7,7 +7,6 @@ from queue import PriorityQueue, Queue
 from graph import Graph
 from node import Node
 from edge import Edge
-import time
 
 
 def init():
@@ -240,6 +239,7 @@ def describe_trajet(graph: Graph, trajet: List[int], total_second: int):
     print(f"Vous êtes à {graph.get_node(trajet[0]).get_name()}.")
     line = graph.get_node(trajet[0]).get_line()
     first_phrase = True
+    station_name = graph.get_node(trajet[0]).get_name()
     for i in range(2, len(trajet)-1):
         if trajet[i] not in Line.get_line_stations(line):
             edge = Edge.get_connection_between_nodes(
@@ -257,14 +257,17 @@ def describe_trajet(graph: Graph, trajet: List[int], total_second: int):
                       (station_name, station_line, list_directions))
                 station_name = graph.get_node(trajet[i]).get_name()
             line = graph.get_node(trajet[i]).get_line()
-    station_line = graph.get_node(trajet[i-2]).get_line()
-    list_directions = "/".join(edge.get_direction())
+    if len(trajet) > 1:
+        edge = Edge.get_connection_between_nodes(
+                    graph.get_node(trajet[-2]), graph.get_node(trajet[-1]))
+        station_line = graph.get_node(trajet[i-2]).get_line()
+        list_directions = "/".join(edge.get_direction())
     print("A %s, changez et prenez la ligne %s direction %s." %
           (station_name, station_line, list_directions))
 
     if total_second % 60:
         second = " et %s seconde" % (
-            total_second % 60) + "s" if total_second % 60 > 0 else ""
+            total_second % 60) + "s" if total_second % 60 > 0 else "" + "."
     print("Vous devriez arriver à %s dans %s minutes%s" %
           (graph.get_node(trajet[-1]).get_name(), total_second//60, second))
 
