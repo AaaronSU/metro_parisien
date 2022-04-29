@@ -5,22 +5,20 @@ from node import Node
 
 class Graph:
     """
-    --------
     Class qui représente un graphe
     --------
 
-    Attributs :
-
-    number_of_node : int
-        Nombre de noeuds du graphe 
-        (initialisé à 0)
-    node_list : Mapping[int: Node]
-        Liste des noeuds du graphe, 
-        clée : ID d'un noeud x 
-        valeur : Adresse d'un noeud x, noeud x est une instance de la class Node
-        (initialisé à vide)
+    Attributs:
+    ---------
+        number_of_node: int
+            Nombre de noeuds du graphe 
+            (initialisé à 0)
+        node_list: Mapping[int: Node]
+            Liste des noeuds du graphe, 
+            Clé: ID d'un noeud x 
+            Valeur: Adresse du noeud x
+            (initialisé à vide)
     """
-    # a revoir node_list
 
     def __init__(self):
         """
@@ -32,50 +30,52 @@ class Graph:
     def get_number_of_node(self) -> int:
         """
         Getter number_of_node (obtenir nombre de noeuds du graphe)
+        ---------
+            Paramètre: Aucun paramètre nécessaire
 
-            Parametre :
-                None 
-
-            Retourne :
-                self.number_of_node (int) : Nombre de noeuds du graphe 
+            Retourne:
+            ---------
+                number_of_node (int): Nombre de noeuds du graphe 
         """
         return self.number_of_node
 
     def set_number_of_node(self, number: int) -> NoReturn:
         """
         Setter number_of_node (changer nombre de noeuds du graphe)
+        ---------
+            Paramètre:
+            ---------
+                number (int): nouveau nombre noeuds du graphe
 
-            Parametre : 
-                number (int) : nouveau nombre noeuds du graphe
-
-            Retourne : 
-                None
+            Retourne: Aucun retour
         """
         self.number_of_node = number
 
     def get_nodes(self) -> List[int]:
         """
-        Getter nodes (obtenir noeuds du graphe par leur identifiant)
+        Obtenir tous les noeuds du graphe par leur identifiant
+        ---------
+            Paramètre: Aucun paramètre nécessaire
 
-            Parametre :
-                None 
-
-            Retourne :
-                [self.node_list.keys()] (List[int]) : liste ID des noeuds du graphe ??????????? #changer en liste, va rien faire ? 
+            Retourne:
+            ---------
+                node_list.keys() (List[int]): liste ID des noeuds du graphe
         """
-        return [self.node_list.keys()]
+        return self.node_list.keys()
 
     def get_node(self, number_of_node: int) -> Optional[Node]:
         """
-        number_of_node : Identifiant d'un noeud x (instance de la class Node)
-        Si noeud dans le graphe, alors renvoie le noeud x et la liste connectedTo de la class Node du noeud x ???? #la liste des noeuds connectés au noeud x
-        Sinon si l'identifiant n'est pas dans graphe, alors renvoie None
+        Si le noeud, d'identifiant number_of_node, est dans le graphe alors renvoie l'adresse du noeud
+        Sinon renvoie None
+        ---------
+            Paramètre:
+            ---------
+                number_of_node (Node): Identifiant d'un noeud 
 
-            Parametre :
-                None 
-
-            Retourne :
-                [self.node_list.keys()] (List[int]) : liste ID des noeuds du graphe ??????????? #changer en liste, va rien faire ? 
+            Retourne:
+            ---------
+                node_list[number_of_node] (Node): Adresse du noeud de ID number_of_node
+                None: number_of_node n'est pas dans graphe
         """
         if number_of_node in self:
             return self.node_list[number_of_node]
@@ -86,27 +86,27 @@ class Graph:
         """
         Ajoute un nouveau noeud dans le graphe
         Augmente le number_of_node par 1
+        ---------
+            Paramètre: 
+            ---------
+                number_of_node (int): Identifiant du noeud à ajouter 
+                name_of_node (str): Nom du noeud à ajouter 
 
-            Parametre : 
-                number_of_node (int) : Identifiant du nouveau noeud à ajouter 
-                name_of_node (str) : Nom du nouveau noeud à ajouter 
-
-            Retourne : 
-                None
+            Retourne: Aucun retour
         """
         self.node_list[number_of_node] = Node(number_of_node, name_of_node)
         self.number_of_node += 1
 
     def remove_node(self, number_of_node: int) -> Node:
         """
-        Supprime un noeud du graphe 
+        Supprime le noeud d'ID number_of_node du graphe 
         Rélève une exception si le noeud n'est pas dans le graphe 
-
-            Parametre : 
+        ---------
+            Paramètre:
+            ---------
                 number_of_node (int): Identifiant du noeud à supprimer
 
-            Retourne : 
-                None
+            Retourne: Aucun retour
         """
         if number_of_node in self:
             return self.node_list.pop(number_of_node)
@@ -119,13 +119,17 @@ class Graph:
             raise Exception("Node not exist in Graphe")
         """
         """
-            Parametre : 
-                node1 (int) : Identifiant du noeud 1
-                node2 (int) : Identifiant du noeud 2
-                weight (int) : Poids du Edge, distance entre noeud 1 et noeud 2
+        Ajoute une instance de Edge pour créer une liaison entre deux noeuds du graphe
+        ---------
+            Paramètre:
+            --------- 
+                node1 (int): Identifiant du noeud 1
+                node2 (int): Identifiant du noeud 2
+                weight (int): Poids du Edge, distance entre noeud 1 et noeud 2
 
-            Retourne : 
-                Edge(self.get_node(node1), self.get_node(node2), weight) (Edge) : crée une instance de la class Edge ??????
+            Retourne:
+            --------- 
+                Edge(node1, node2, weight) (Edge): crée une instance de la class Edge pour node1 et node2
         """
         self.get_node(node1).add_connection(node2, self.get_node(node2))
         return Edge(self.get_node(node1), self.get_node(node2), weight)
