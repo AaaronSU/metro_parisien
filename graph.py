@@ -113,11 +113,6 @@ class Graph:
         raise Exception("Node not exist in Graph")
 
     def add_edge(self, node1: int, node2: int, weight: int) -> Edge:
-        # Rajouter une exception si node1 et node2 ne sont pas dans le graphe ? OU ca sert à rien ?
-        """ if node1 in self and node2 in self: 
-                blabla 
-            raise Exception("Node not exist in Graphe")
-        """
         """
         Ajoute une instance de Edge pour créer une liaison entre deux noeuds du graphe
         ---------
