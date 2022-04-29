@@ -1,7 +1,8 @@
 #!/usr/bin/python3
+from ctypes import Union
 import time
 from os import system, name
-from typing import List, Mapping, NoReturn, Optional
+from typing import List, Mapping, NoReturn, Optional, Sequence
 from metro_line import Line
 from queue import PriorityQueue, Queue
 from graph import Graph
@@ -9,7 +10,7 @@ from node import Node
 from edge import Edge
 
 
-def init():
+def init() -> Graph:
     """
     Cré le graphe du réseau métro parisien d'après les données du fichier "metro.txt"
     --------- 
@@ -39,13 +40,13 @@ def init():
     return graph
 
 
-def get_metro_lines(graph: Graph):
+def get_metro_lines(graph: Graph) -> List[Sequence[Mapping[int, Node]]]:
     """
-    Crée des lignes de métro d'après un graphe
+    Crée des lignes de métro d'après un graphe en faisant un parcours en profondeur
     --------- 
         Paramètre:
         ---------
-            graph (Graph): graphe répresentant un réseau métro
+            graph (Graph): graphe représentant un réseau métro
 
         Retourne:
         ---------
@@ -66,19 +67,19 @@ def get_metro_lines(graph: Graph):
 
 def pp(graph: Graph, vertex: Node, stations_ligne: Mapping[int, Node], terminus: Mapping[int, Node]):
     """
-    pp : Parcours en profondeur
-    Permet de faire le parcours en profondeur d'un graphe
+    pp : Parcours en profondeur.
+    Permets de faire le parcours en profondeur d'un graphe.
     --------- 
         Paramètre:
         ---------
-            graph (Graph): graphe répresantant un réseau metro
-            vertex (Node): station de métro 
-            stations_ligne (Mapping[int, Node]): 
-            terminus (Mapping[int, Node]): 
+            graph (Graph): graphe qui représente un réseau métro.
+            vertex (Node): station de métro.
+            stations_ligne (Mapping[int, Node]): les identifiants et l'adresse de toutes les stations de la ligne.
+            terminus (Mapping[int, Node]): identifiants et adresses de tous les terminus de la ligne après le traitement.
         Retourne:
         --------
-            stations_ligne: 
-            terminus: graphe du métro parisien
+            stations_ligne (Mapping[int, Node]): identifiants et adresses de toutes les stations de la ligne après le traitement.
+            terminus (Mapping[int, Node]): identifiants et adresses de tous les terminus de la ligne après le traitement.
     """
     stations_ligne[vertex.id] = vertex
     vertex.color = "black"
@@ -98,6 +99,18 @@ def pp(graph: Graph, vertex: Node, stations_ligne: Mapping[int, Node], terminus:
 
 
 def bfs(graph: Graph, node: Node) -> None:
+    """
+    bfs : Parcours en largeur.
+    marque la couleur du noeud en noir si il existe une liaison possible en partant de la station de départ.
+    ---------
+        Paramètre:
+        ---------
+            graph (Graph): graphe qui représente un réseau métro.
+            node (Node): station de métro.
+        Retourne:
+        --------
+            None
+    """
     for vertex in graph:
         vertex.set_color("white")
     if node.get_id() not in graph:
@@ -115,7 +128,17 @@ def bfs(graph: Graph, node: Node) -> None:
         currentVert.set_color('black')
 
 
-def is_connexe(graph: Graph):
+def is_connexe(graph: Graph) -> bool:
+    """
+    Retourner si un graphe est connexe (marche que dans le cas non orienté)
+    ---------
+        Paramètre:
+        ---------
+            graph (Graph): graphe qui représente un réseau métro.
+        Retourne:
+        --------
+            retourne True si le graphe est connexe et False sinon
+    """
     bfs(graph, graph.get_node(0))
     for vertex in graph:
         if vertex.color != "black":
@@ -123,7 +146,19 @@ def is_connexe(graph: Graph):
     return True
 
 
-def dijkstra(graph: Graph, start_node: int):
+def dijkstra(graph: Graph, start_node: int) -> Mapping[int: Union[float, int]]:
+    """
+    L'implémentation de l'algorithme de Dijkstra permettant de trouver le plus court chemin d'un point aux tous les autres points.
+        ---------
+        Paramètre:
+        ---------
+            graph (Graph): graphe qui représente un réseau métro.
+            start_node (int): identifiant unique d'une station
+        Retourne:
+        --------
+            retourne True si le graphe est connexe et False sinon
+
+    """
     dico = {node.get_id(): float('inf') for node in graph}
     dico[start_node] = 0
 
@@ -149,7 +184,21 @@ def dijkstra(graph: Graph, start_node: int):
     return dico
 
 
-def find_shortest_path(graph: Graph, start_node: int, destination: int) -> Optional[List[int]]:
+def find_shortest_path(graph: Graph, start_node: int, destination: int) -> Sequence[List[int], int]:
+    """
+    En récupérant le dictionnaire retourné par l'algorithme de Dijkstra avec start_node, trouver le plus chemin pour aller de la destination en remontant dans le prédécesseur de la destination
+        ---------
+        Paramètre:
+        ---------
+            graph (Graph): graphe qui représente un réseau métro.
+            start_node (int): identifiant unique de la station de départ
+            destionation (int): identifiant unique de la station d'arrivée
+        Retourne:
+        --------
+            liste (List[int]): liste des sommets passant pour aller du sommet de départ au sommet d'arrivée
+            total_second: nombre total de seconde pour aller du sommet de départ au sommet d'arrivée
+
+    """
     dico = dijkstra(graph, start_node)
     total_second = dico[destination]
     liste = [destination]
@@ -161,7 +210,18 @@ def find_shortest_path(graph: Graph, start_node: int, destination: int) -> Optio
     return liste, total_second
 
 
-def initialize_metro_lines(graph: Graph) -> NoReturn:
+def initialize_metro_lines(graph: Graph) -> List[Line]:
+    """
+    Instancie les lignes de métro en faisant appel à la fonction get_metro_lines(graph)
+        ---------
+        Paramètre:
+        ---------
+            graph (Graph): graphe qui représente un réseau métro.
+        Retourne:
+        --------
+            (List[Line]) retourner les adresses de tous les lignes de métro dans le graphe
+
+    """
     lines_info = [
         ("12", "#007852"),
         ("2", "#003CA6"),
@@ -193,7 +253,10 @@ def initialize_metro_lines(graph: Graph) -> NoReturn:
     return Line.get_line_list()
 
 
-def find_direction():
+def find_direction() -> NoReturn:
+    """
+    Pour toutes les liaisons entre deux stations des lignes de métro, trouver la direction de cette liaison, c'est-à-dire le terminus de cette liaison.
+    """
     q = Queue()
     for line in Line.get_line_nodes():
         for terminus in line.get_terminus_nodes():
@@ -211,6 +274,17 @@ def find_direction():
 
 
 def ask_line_number(msg_ask_line: str) -> str:
+    """
+    Demande à l'utilisateur de rentrer une ligne de métro valable. Si les données ne sont pas valables, redemande jusqu'à ce soit valable.
+        ---------
+        Paramètre:
+        ---------
+            msk_ask_line (str): le message à afficher
+        Retourne:
+        --------
+            retourner le numéro de la ligne 
+
+    """
     line_number = input(msg_ask_line)
     if line_number in Line.get_line_number():
         return line_number
@@ -222,6 +296,20 @@ def ask_line_number(msg_ask_line: str) -> str:
 
 
 def ask_station_number(line_number: str, msg_print_line: str, msg_ask_station) -> int:
+    """
+    Idem pour le numéro dans la ligne de métro.
+        ---------
+        Paramètre:
+        ---------
+            line_number: Le numéro de la ligne du métro
+            msg_print_line: Le message à afficher
+            msg_ask_station : Le message à afficher
+        Retourne:
+        --------
+            retourner le numéro de la ligne
+
+    """
+
     clear()
     print(
         f"{msg_print_line} {line_number} qui ont pour les stations suivantes : ")
@@ -251,7 +339,18 @@ def ask_station_number(line_number: str, msg_print_line: str, msg_ask_station) -
         return ask_station_number(line_number, msg_print_line, msg_ask_station)
 
 
-def get_station(message: str):
+def get_station(message: str) -> int:
+    """
+        Obtenir une station de métro valable
+        ---------
+        Paramètre:
+        ---------
+            message(str) : message à afficher
+        Retourne:
+        --------
+            (int) : retourne le numéro d'une station qui existe dans le graphe
+
+    """
     clear()
     if message == "départ":
         msg_ask_line = "Quelle est la ligne que vous êtes actuellement ?\n"
@@ -268,19 +367,19 @@ def get_station(message: str):
     return station_number
 
 
-def describe_trajet(graph: Graph, trajet: List[int], total_second: int):
+def describe_trajet(graph: Graph, trajet: List[int], total_second: int) -> NoReturn:
     """
-    Crée le graphe du réseau métro parisien d'après les données du fichier "metro.txt"
+    décrire le trajet pour le plus court chemin
     --------- 
         Paramètre:
         --------- 
-        graph (Graph):
-        trajet (List[int]):
-        total_second (int):
+        graph (Graph): graphe qui représente un réseau métro
+        liste (List[int]): liste des sommets passant pour aller du sommet de départ au sommet d'arrivée
+        total_second: nombre total de seconde pour aller du sommet de départ au sommet d'arrivée
 
         Retourne:
         ---------
-            graph (Graph): graphe du métro parisien
+            None
     """
     while len(trajet) > 1 and graph.get_node(trajet[0]).get_name() == graph.get_node(trajet[1]).get_name():
         trajet = trajet[1:]
@@ -323,6 +422,9 @@ def describe_trajet(graph: Graph, trajet: List[int], total_second: int):
 
 
 def clear():
+    """
+    efface les contenus sur le terminal
+    """
     # for windows
     if name == 'nt':
         _ = system('cls')
