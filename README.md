@@ -338,10 +338,11 @@ Le code ci-dessous représente les stations des métros manquantes.
 ```
 
 ### Affichage graphique des sommets avec la librairie externe *pyvis*
-L'example qui n'est pas fini donc nous avons décidé de ne pas mettre tous de suite le code sur github.
 
-L'image du plan des lignes de métro.
+Utilisation de pyvis. Voici le résultat d'un début de code permettant de modéliser graphiquement le réseau de métro parisien. Malheureusement, par manque de temps, nous avons décidé de ne pas mettre tout de suite le code github. 
+
 ![](img/pyvis-plan.png)
 
-L'image sur une zone du métro.
+Zoom sur une des stations de métro
+
 ![](img/pyvis-zone.png)
