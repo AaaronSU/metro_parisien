@@ -155,7 +155,8 @@ Pour créer une liaison entre deux stations de métro nous avons la méthode get
 
 La classe Line répresente une ligne de métro. 
 
-Une ligne de métro possède un numéro, des stations et des terminus. 
+Une ligne de métro possède un numéro, des stations et des terminus.
+
 Le numéro de la ligne est stocké dans l'attribut numero.
 Les stations desservies par la ligne sont stockée dans l'attribut node_list. node_list est un dictionnaire. La clé est l'identifiant unique des stations et la valeur est l'adresse de la station. 
 Les terminus sont stockés dans l'attribut terminus. C'est un dictionnaire de même type que node_list. Le dictionnaire possède les terminus des deux sens de la ligne de métro. 
