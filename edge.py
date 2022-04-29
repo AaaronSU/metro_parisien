@@ -10,7 +10,7 @@ class Edge(object):
     Attribut de la class Edge :
 
     edge_list: List
-        Liste de tous les liaisons (Edge) entre deux noeuds
+        Liste de tous les instances de Edge créer
     -------
 
     Attributs :
@@ -23,7 +23,6 @@ class Edge(object):
         Poids de la liaison : distance entre les deux noeuds
     direction: None ou List[str]
         ????
-
     """
 
     edge_list: List = []
@@ -43,7 +42,7 @@ class Edge(object):
 
     def get_starting_node(self) -> Node:
         """
-        Getteur starting_node
+        Getter starting_node (obtenir starting_node (noeud de départ) du edge )
 
             Parametre :
                 None 
@@ -55,7 +54,7 @@ class Edge(object):
 
     def set_starting_node(self, node: Node) -> NoReturn:
         """
-        Setteur starting_node
+        Setter starting_node (changer starting_node (noeud de départ) du edge)
         Rélève une exception si starting_node n'est pas une instance de la class Node
 
             Parametre :
@@ -70,7 +69,7 @@ class Edge(object):
 
     def get_arrival_node(self) -> Node:
         """
-        Getteur arrival_node
+        Getter arrival_node (obtenir arrival_node (noeud d'arrivé) du edge)
 
             Parametre :
                 None 
@@ -82,7 +81,7 @@ class Edge(object):
 
     def set_arrival_node(self, node: Node) -> NoReturn:
         """
-        Setteur arrival_node
+        Setter arrival_node (changer arrival_node (noeud d'arrivé) du edge)
         Rélève une exception si starting_node n'est pas une instance de la class Node
 
             Parametre :
@@ -97,7 +96,7 @@ class Edge(object):
 
     def get_weight(self) -> int:
         """
-        Getteur weight
+        Getter weight (obtenir weight du edge)
 
             Parametre :
                 None 
@@ -109,7 +108,7 @@ class Edge(object):
 
     def set_weight(self, weight: int) -> NoReturn:
         """
-        Setteur weight
+        Setter weight (changer weight du edge)
 
             Parametre :
                 self.weight (int) : Nouveau poids du edge, distance entre deux noeuds
@@ -121,7 +120,7 @@ class Edge(object):
 
     def get_direction(self) -> str:
         """
-        Getteur direction
+        Getter direction (obtenir direction du edge)
 
             Parametre :
                 None 
@@ -133,7 +132,7 @@ class Edge(object):
 
     def add_direction(self, direction: str) -> NoReturn:
         """
-        S'il n'y a aucune ????
+        ????
         ??? 
 
             Parametre :

@@ -3,9 +3,44 @@ from node import Node
 
 
 class Line(object):
+    """
+    Class qui représente une ligne de métro
+    --------
+
+    Attribut de la class Line:
+
+    line_list: Mapping[str, Line]
+        Dictionnaire de tous les lignes de métro crée (tous les instances de Line crée)
+        Clée : numero de la ligne de métro 
+        Valeur : adresse de la ligne de métro ???? #On appelle ca bien une adresse ou est-ce qu'il y a un nom plus technique pour bien comprendre
+    -------
+
+    Attributs:
+
+    numero: str 
+        Numero de la ligne de métro
+    color: str
+        Couleur de la ligne de métro
+    node_list: Mapping[int: Node]
+        Dictionnaire des stations de métro (Node) de la ligne
+        Clé : Identifiant du noeud 
+        Valeur : Adresse du noeud 
+        (initialisé à vide)
+    number_of_node: int
+        Nombre de station de métro (Node) de la ligne
+        (initialisé à vide)
+    terminus: Mapping[int: Node]
+        Dictionnaire des stations (Node) de terminus de la ligne
+        Clé : Identifiant du noeud 
+        Valeur : Adresse du noeud
+        (initialisé à vide)
+    """
     line_list: Mapping[str, Any] = {}
 
     def __init__(self, numero: str, color: str):
+        """
+        Constructeur de la class Line
+        """
         self.numero: str = numero
         self.color: str = color
         self.node_list: Mapping[int: Node] = {}
@@ -14,18 +49,45 @@ class Line(object):
         Line.line_list[numero] = self
 
     def get_numero(self) -> int:
+        """
+        Getter numero (obtenir le numero de la ligne)
+
+            Parametre :
+                None 
+
+            Retourne :
+                self.numero (int) : numero de la ligne
+        """
         return self.numero
 
     def set_numero(self, numero: str) -> NoReturn:
         self.numero = numero
 
     def get_color(self) -> str:
+        """
+        Getter color (obtenir couleur de la ligne)
+
+            Parametre :
+                None 
+
+            Retourne :
+                self.color (str) : couleur de la ligne de métro
+        """
         return self.color
 
     def set_color(self, color: str) -> NoReturn:
         self.color = color
 
     def get_nodes(self) -> List[int]:
+        """
+        Getter nodes (obtenir les stations (Node), par leur identifiant, de la ligne de métro)
+
+            Parametre :
+                None 
+
+            Retourne :
+                self.node_list.keys (List[int]) : Liste des identifiants des stations (Node) de la ligne de métro
+        """
         return self.node_list.keys()
 
     def get_node(self, number_of_node: int) -> Optional[Node]:

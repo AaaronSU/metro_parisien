@@ -7,25 +7,30 @@ from pyparsing import line
 class Node(object):
     """
     --------
-    Class qui représente un noeud ( un sommet )
+    Class qui représente un noeud (un sommet)
+    Noeud = une station de métro
     --------
 
-    Attributs :
+    Attributs:
 
-    id  : int 
+    id: int 
         Identifiant du noeud
-    name : str
+    name: str
         Nom du noeud 
-    color : str 
-        Couleur du noeud, par défault blanc
-    predecessor : Node
+    color: str 
+        Couleur du noeud
+        (initialisé: blanc)
+    predecessor: Node
+        ?????
+    distance: int 
         ????
-    distance : int 
-        ????
-    connectedTo : dicitonnaire {int: Node}
-        Liste des noeuds x connecté au noeud (self), 
-        clée : ID d'un noeud x 
-        valeur : Adresse d'un noeud x, noeud x est une instance de la class Node 
+    line: str
+        Ligne de métro affilé au noeud
+    connectedTo: Mapping{int: Node}
+        Liste des noeuds x connecté au noeud (self),
+        Noeuds x sucesseur du noeud (self), 
+        Clée: ID d'un noeud x 
+        Valeur: Adresse d'un noeud x, noeud x est une instance de la class Node 
     """
 
     def __init__(self, id: int, name: str):
@@ -42,19 +47,19 @@ class Node(object):
 
     def get_id(self) -> int:
         """
-        Getteur ID
+        Getter ID (obtenir l'identifiant du noeud)
 
-            Parametre :
+            Parametre:
                 None 
 
-            Retourne :
-                self.id (int) : ID du noeud 
+            Retourne:
+                self.id (int): ID du noeud 
         """
         return self.id
 
     def set_id(self, id: int) -> NoReturn:
         """
-        Setteur ID 
+        Setter ID (changer l'identifiant du noeud)
 
             Parametre :
                 id (int) : nouveau ID du noeud
@@ -66,7 +71,7 @@ class Node(object):
 
     def get_name(self) -> str:
         """
-        Getteur name
+        Getter name (obtenir nom du noeud)
 
             Parametre :
                 None 
@@ -78,7 +83,7 @@ class Node(object):
 
     def set_name(self, name: str) -> NoReturn:
         """
-        Setteur name
+        Setter name (changer nom du noeud)
 
             Parametre :
                 name (str) : nouveau nom du noeud
@@ -90,7 +95,7 @@ class Node(object):
 
     def get_color(self) -> str:
         """
-        Getteur color
+        Getter color (obtenir couleur du noeud)
 
             Parametre :
                 None 
@@ -102,7 +107,7 @@ class Node(object):
 
     def set_color(self, color: str) -> NoReturn:
         """
-        Setteur color
+        Setter color (changer couleur du noeud)
 
             Parametre :
                 color (str) : nouveau couleur du noeud
@@ -114,7 +119,7 @@ class Node(object):
 
     def get_predecessor(self) -> Optional[Any]:
         """
-        Getteur predecessor
+        Getter predecessor (obtenir prédécesseur du noeud)
 
             Parametre :
                 None 
@@ -126,7 +131,7 @@ class Node(object):
 
     def set_predecessor(self, predecessor: Any) -> NoReturn:
         """
-        Setteur predecessor
+        Setter predecessor (changer prédécesseur du noeud)
 
             Parametre :
                 predecessor (Node) : ???  du noeud
@@ -138,7 +143,7 @@ class Node(object):
 
     def get_distance(self) -> int:
         """
-        Getteur distance
+        Getter distance (obtenir distance du noeud)
 
             Parametre :
                 None 
@@ -150,7 +155,7 @@ class Node(object):
 
     def set_distance(self, distance: int) -> NoReturn:
         """
-        Setteur distance
+        Setter distance (changer distance du noeud)
 
             Parametre :
                 distance (int) : ???
@@ -161,32 +166,50 @@ class Node(object):
         self.distance = distance
 
     def get_line(self) -> Optional[str]:
-        return self.line
-
-    def set_line(self, line: str) -> NoReturn:
-        self.line = line
-
-    def get_connections(self) -> List[int]:
         """
-        Getteur connections
+        Getter line (obtenir ligne de métro du noeud)
 
             Parametre :
                 None 
 
             Retourne :
-                self.connectedTo.keys() List[int] : Liste ID des noeuds connectés au noeud ( self )  
+                self.line (str) : ligne de métro affilé au noeud
+        """
+        return self.line
+
+    def set_line(self, line: str) -> NoReturn:
+        """
+        Setter distance (changer ligne de métro du noeud)
+
+            Parametre :
+                line (str) : ligne de métro affilé au noeud
+
+            Retourne : 
+                None
+        """
+        self.line = line
+
+    def get_connections(self) -> List[int]:
+        """
+        Getter connections (obtenir connections du noeud)
+
+            Parametre :
+                None 
+
+            Retourne :
+                [self.connectedTo.keys()] (List[int]) : Liste ID des noeuds connectés au noeud ( self )  
         """
         return [self.connectedTo.keys()]
 
     def add_connection(self, number_of_node: int, connection: Any) -> NoReturn:
         """
-        Ajoute un noeud x (Node) au dictionnaire connectedTo 
-        Ainsi le nouveau noeud x sera connecté au noeud (self)
-        Rélève une execption si ID du nouveau noeud x et number_od_node ne correspondent pas
+        Ajoute un noeud x au dictionnaire connectedTo du noeud (self)
+        ~Ainsi le nouveau noeud x sera connecté au noeud (self)~
+        Rélève une execption si ID du nouveau noeud x et number_of_node ne correspondent pas
 
             Parametre : 
                 number_of_node (int) : Identifiant du nouveau noeud connecté
-                connection (Node) : adresse du noeud connecté  ???
+                connection (Node) : adresse du noeud x ajouté à connectedTo
 
             Retourne : 
                 None 
@@ -198,8 +221,8 @@ class Node(object):
 
     def remove_connection(self, number_of_node: int):
         """ 
-        Supprime l'item de connectedTo (dictionnaire) correspondant au number_of_node
-        Ainsi, supprime un noeud x connecté au noeud (self)
+        Supprime le noeud x, pour ID number_of_node, de connectedTo du noeud (self)
+        Ainsi, supprime un noeud x connecté au noeud (self) ?????
         Rélève une exception si le number_of_node n'est pas dans connectedTo
 
             Parametre : 
@@ -207,7 +230,6 @@ class Node(object):
 
             Retourne : 
                 None
-
         """
         if number_of_node in self:
             self.connectedTo.pop(number_of_node)
