@@ -3,9 +3,9 @@
 Le projet consiste à trouver le plus court chemin entre 2 stations de métro.
 Pour lancer le programme, vous avez besoin des outils suivants :
 - python 3.8 ou ultérieurement
-- pyvis (pour la partie graphique qui va être implementée dans le futur)
+- pyvis (pour la partie graphique qui va être implémentée dans le futur)
 
-Pour installer pyvis, il faut que vous ayez l'outil de la gestion des packages python *pip*.
+Pour installer pyvis, il faut que vous ayez l'outil de gestion des packages python *pip*.
 - https://pip.pypa.io/en/stable/installation/
 - https://pyvis.readthedocs.io/en/latest/install.html
 
@@ -17,7 +17,7 @@ Nous avons décidé de séparer notre projet en 2 parties : les structures de do
 La première partie est écrite en orienté objet et la deuxième partie est fonctionnelle.
 Python utilise la programmation orientée objet et la programmation fonctionnelle, ce découpage exploite la diversité du langage Python.
 
-Dans la documentation nous allons voir d'abord les structures de données que nous avons choisi. Elles ont était implémenté en classe.Puis,les fonctions que nous avons programmé grâce à nos structure de données. Pour finir, nous allons voir les améliorations que nous pouvons apporter en plus sur le projet.
+Dans la documentation, nous allons voir d'abord les structures de données que nous avons choisies. Elles ont été implémentées en classe. Puis, les fonctions que nous avons programmé grâce à nos structure de données. Pour finir, nous allons voir les améliorations que nous pouvons apporter en plus sur le projet.
 
 
 ## Sommaire
@@ -49,33 +49,33 @@ Dans la documentation nous allons voir d'abord les structures de données que no
 
 ---
 ## Structure de données
-Notre structure de données est constitué de 4 classes : graph, node, line, edge.
-Graph va nous servir à créer notre carte de métro parisien. 
-Node va nous permettre de répresenter les stations de métro.
-Line va nous permettre de répresenter les lignes de métro. 
-Edge va nous permettre de créer les liaisons direct entre deux stations de métro. 
+Notre structure de données est constituée de 4 classes : graph, node, line, edge.
+Graph va nous servir à créer notre carte de métro parisien.
+Node va nous permettre de représenter les stations de métro.
+Line va nous permettre de représenter les lignes de métro.
+Edge va nous permettre de créer les liaisons directes entre deux stations de métro. 
 
 ### Graph
 
-Un graphe quelques soit sa manière de représentations ou son type (orienté ou non) possède des noeuds et des arêtes. 
+Un graphe quel que soit sa manière de représentations ou son type (orienté ou non) possède des nœuds et des arêtes.
 
 Cette classe permet d'initialiser un graphe vide.
 
-L'attribut "number_of_node" est le nombre de noeuds du graphe. 
+L'attribut "number_of_node" est le nombre de nœuds du graphe.
 
-Les noeuds sont ajouté au graphe grâce à la méthode add_node() et sont créer par la classe Node.
+Les nœuds sont ajoutés au graphe grâce à la méthode add_node() et sont créer par la classe Node.
 
-Les noeuds sont stockés dans l'attribut node_list. Cet attribut est un dictionnaire. La clé du dictionnaire est l'identifiant unique des noeuds et la valeur est l'adresse du noeud.
+Les nœuds sont stockés dans l'attribut node_list. Cet attribut est un dictionnaire. La clé du dictionnaire est l'identifiant unique des nœuds et la valeur est l'adresse du nœud.
 
-La méthode get_nodes() nous permet d'obtenir tous les noeuds. Les noeuds sont renvoyés par leurs identifiants.
+La méthode get_nodes() nous permet d'obtenir tous les nœuds. Les nœuds sont renvoyés par leurs identifiants.
 
-La méthode get_node(id_noeud) nous permet d'obtenir l'adresse du noeud et ainsi pouvoir utiliser l'instance noeud. 
+La méthode get_node (id_noeud) nous permet d'obtenir l'adresse du nœud et ainsi pouvoir utiliser l'instance nœud.
 
-On peut aussi supprimer des noeuds du graphe grace à la méthode remove_node().
+On peut aussi supprimer des nœuds du graphe grâce à la méthode remove_node().
 
-La liaison entre deux noeuds est assuré par la méthode add_edge().
-Elle crée une instance de la classe Edge. 
-Cela représente ainsi une "arête" entre les noeuds.
+La liaison entre deux nœuds est assuré par la méthode add_edge().
+Elle crée une instance de la classe Edge.
+Cela représente ainsi une "arête" entre les nœuds.
 
 #### Attributs
 
@@ -99,21 +99,21 @@ Cela représente ainsi une "arête" entre les noeuds.
 
 ### Node
 
-La classe Node permet de créer des noeuds/sommets. 
-Un noeud, pour notre projet, est une station de métro. 
+La classe Node permet de créer des nœuds/sommets.
+Un nœud, pour notre projet, est une station de métro.
 
-Chaque noeud possède un identifiant unique. Cette identifant est stockés dans l'attribut id. 
+Chaque nœud possède un identifiant unique. Cet identifient est stockés dans l'attribut id.
 
-Un chemin est une suite de noeuds qui permet d'aller d'un noeud x à un noeud y.
-L'attribut predecessor est un noeud x qui précède dans un chemin le noeud créé. Il est initialisé à "None" puisque le noeud créer n'est pas encore lié à des autres. Il peut être ainsi modifié par la suite.
+Un chemin est une suite de nœuds qui permet d'aller d'un nœud x à un nœud y.
+L'attribut predecessor est un nœud x qui précède dans un chemin le nœud créé. Il est initialisé à "None" puisque le nœud créé n'est pas encore lié à des autres. Il peut être ainsi modifié par la suite.
 
-Dans un chemin pour passer d'un noeud à un autre, il faut que ses noeuds soivent connecté. 
-Chaque noeud x, connecté au noeud crée, est stockée dans l'attribut connectTo. connectedTo est un dictionnaire. La clé est l'identifiant d'un noeud x et la valeur est l'adresse en mémoire de ce noeud. 
-Pour avoir accès à la liste de tous les noeuds connectés au noeud crée, il y a la méthode get_connections(). Permettant ainsi de savoir quel noeud est connecté avec quel autre noeud.
-Les méthodes add_connection permet d'ajouter un noeud x à connectedTo.  
-La méthode remove_connection permet de supprimer un noeud x à connectedTo.
+Dans un chemin pour passer d'un nœud à un autre, il faut que ses nœuds soient connectés.
+Chaque nœud x, connecté au nœud crée, est stockée dans l'attribut connectTo. connectedTo est un dictionnaire. La clé est l'identifiant d'un nœud x et la valeur est l'adresse en mémoire de ce nœud.
+Pour avoir accès à la liste de tous les nœuds connectés au nœud crée, il y a la méthode get_connections(). Permettant ainsi de savoir quel nœud est connecté avec quel autre nœud.
+Les méthodes add_connection permet d'ajouter un nœud x à connectedTo.
+La méthode remove_connection permet de supprimer un nœud x à connectedTo.
 
-Pour finir, chaque noeud est affilé à une ligne de métro.
+Pour finir, chaque nœud est affilé à une ligne de métro. La ligne de métro est stockée dans l'attribut line. 
  
 #### Attributs
 
@@ -153,22 +153,22 @@ Pour finir, chaque noeud est affilé à une ligne de métro.
 
 ### Edge
 
-La classe Edge représente une arête entre deux noeuds.
-Pour comprendre plus facilement le fonctionnement de cette classe  par rapport à notre projet, nous allons utiliser station de métro pour parler de noeud.
+La classe Edge représente une arête entre deux nœuds.
+Pour comprendre plus facilement le fonctionnement de cette classe par rapport à notre projet, nous allons utiliser la station de métro pour parler de nœud.
 
-La liaison entre deux stations de métro se fait uniquement si elle est directe et si elle ne passe pas par d'autre stations. 
-Ainsi une liaison (une instance de la classe Edge) se fait entre deux stations. 
-La station de départ est stocké dans l'attribut starting_node et la station d'arriver dans arrival_node. 
+La liaison entre deux stations de métro se fait uniquement si elle est directe et si elle ne passe pas par d'autres stations.
+Ainsi, une liaison (une instance de la classe Edge) se fait entre deux stations.
+La station de départ est stockée dans l'attribut starting_node et la station d'arriver dans arrival_node.
 La distance en seconde entre ses deux stations est stockée dans l'attribut weight.
 
-La direction de la liaison est en rapport avec la classe Line et ainsi par rapport au ligne de métro. 
-Une ligne de métro possède des terminus. Lorsqu'on veut passer d'une station de métro x à une station de métro y, nous prenons une ligne de métro qui va vers un terminus. 
-La direction d'une liaison est donc ce concept. 
-Une liaison va vers un terminus d'une ligne. Ainsi la direction est un terminus (station de métro)
-Cette direction est stocké dans l'attribut direction. 
-Il y a des méthodes qui permettent d'ajouter ou supprimer cette direction. 
+La direction de la liaison est en rapport avec la classe Line et ainsi par rapport à la ligne de métro.
+Une ligne de métro possède des terminus. Lorsqu'on veut passer d'une station de métro x à une station de métro y, nous prenons une ligne de métro qui va vers un terminus.
+La direction d'une liaison est donc ce concept.
+Une liaison va vers un terminus d'une ligne. Ainsi, la direction est un terminus (station de métro).
+Cette direction est stockée dans l'attribut direction.
+Il y a des méthodes qui permettent d'ajouter ou de supprimer cette direction.
 
-Pour créer une liaison entre deux stations de métro nous avons la méthode get_connections_of_node() qui à partir d'un sommet trouver toutes les liaisons de ce sommet.
+Pour créer une liaison entre deux stations de métro, nous avons la méthode get_connections_of_node() qui à partir d'un sommet trouver toutes les liaisons de ce sommet.
 
 
 #### Attributs
@@ -208,14 +208,14 @@ Pour créer une liaison entre deux stations de métro nous avons la méthode get
 
 ### Line
 
-La classe Line répresente une ligne de métro. 
+La classe Line représente une ligne de métro.
 
-Une ligne de métro possède un numéro, des stations et des terminus. 
-Le numéro de la ligne est stocké dans l'attribut numero.
-Les stations desservies par la ligne sont stockée dans l'attribut node_list. node_list est un dictionnaire. La clé est l'identifiant unique des stations et la valeur est l'adresse de la station. 
-Les terminus sont stockés dans l'attribut terminus. C'est un dictionnaire de même type que node_list. Le dictionnaire possède les terminus des deux sens de la ligne de métro. 
-Les stations desservies sont ajoutées par la fonction add_node() ou supprimer par remove_node(). 
-De même que les terminus sont ajoutés par la fonction add_terminus() et supprimer par remove_terminus()
+Une ligne de métro possède un numéro, des stations et des terminus.
+Le numéro de la ligne est stocké dans l'attribut numéro.
+Les stations desservies par la ligne sont stockées dans l'attribut node_list. node_list est un dictionnaire. La clé est l'identifiant unique des stations et la valeur est l'adresse de la station.
+Les terminus sont stockés dans l'attribut terminus. C'est un dictionnaire de même type que node_list. Le dictionnaire possède les terminus des deux sens de la ligne de métro.
+Les stations desservies sont ajoutées par la fonction add_node() ou supprimer par remove_node().
+De même que les terminus sont ajoutés par la fonction add_terminus() et supprimer par remove_terminus().
 
 #### Attributs 
 
@@ -259,36 +259,36 @@ De même que les terminus sont ajoutés par la fonction add_terminus() et suppri
 ## Fonctions principales
 
 ### Initialiser le graphe
-Pour initialiser le graphe, nous avons fait une fonction pour extraire les données dans metro.txt et les stocker dans notre graphe.
-
+Pour initialiser le graphe, nous avons fait une fonction (init) pour extraire les données dans metro.txt et les stocker dans notre graphe.
 La fonction regarde le premier caractère de chaque ligne afin de déterminer le traitement associé. Il y a 3 cas possibles :
-
 - si la ligne commence par #, on la néglige.
-- si la ligne commence par V, on ajoute au graphe un noeud
+- si la ligne commence par V, on ajoute au graphe un nœud.
 - si la ligne commence par E, on ajoute au graphe une arête dans un sens et dans l'autre sens pour rendre le graphe non orienté afin de faciliter l'implémentation des algorithmes.
 
 ### Vérifier la connexité
 Pour vérifier la connexité du graphe, nous avons fait un parcours en largeur. (fonction bfs)
 
 Dans un premier temps, tous les sommets sont mis en blanc.
-Un sommet est selectionner et ajouter à une liste. Cette liste répresente les sommets à traiter. Tant que la liste à traiter n'est pas vide, le premier élément de la liste est sélectionner. Tous les successeurs du sommet sont ajouter à la liste à traiter. Lorsque tous les sucesseurs sont traiter, le sommet père est mis en noir et est enlever de la liste à traiter. Et cela s'itere jusqu'à que tous les sommets liée soit traiter. 
+Un sommet est sélectionné et ajouter à une liste. Cette liste représente les sommets à traiter. Tant que la liste à traiter n'est pas vide, le premier élément de la liste est sélectionner. Tous les successeurs du sommet sont ajoutés à la liste à traiter. Lorsque tous les successeurs sont traités, le sommet père est mis en noir et est enlever de la liste à traiter. Et cela, s'itère jusqu'à que tous les sommets liés soit traiter.
 
-Dans un second temps, on applique la fonction au sommet du graphe. Si un sommet n'est pas colorié en noir alors le graphe n'est pas connexe
+Dans un second temps, on applique la fonction au sommet du graphe. Si un sommet n'est pas colorié en noir alors le graphe n'est pas connexe.
 
+Ici, le terme "liste" est utilisé, mais dans la fonction nous avons utilisé la structure FIFO.
 
 ### Trouver les lignes avec les stations de métro associées
 Pour trouver les stations d'une ligne de métro, nous avons décidé de faire un parcours en profondeur. (fonction pp)
 
-On initialise une liste. On choisit une station de départ qu'on rajoute à liste. On itère sur les sucesseur de cette station. Si un sucesseur n'a pas le même nom que la station choisi, nous ajoutons ce sucesseur dans la liste. Si le même nom on le néglige. L'itération quand tous les stations sont dans la liste.
+On initialise une liste. On choisit une station de départ qu'on rajoute à liste. On itère sur les successeurs de cette station. Si un successeur n'a pas le même nom que la station choisie, nous ajoutons ce successeur dans la liste. Si c'est le même nom alors on le néglige. L'itération se termine quand toutes les stations sont dans la liste.
 
 ### Trouver les terminus des lignes
-Pour trouver les terminus des lignes, nous avons utilisé la fonctions pp. Lorsque une station a un unique  successeur qui a un nom différent alors c'est un terminus de la ligne. 
+Pour trouver les terminus des lignes, nous avons utilisé la fonction pp. Lorsque une station a un unique successeur qui a un nom différent alors c'est un terminus de la ligne.
 
-Nous avons vérifier les lignes et les terminus humainement. Les numéros des lignes ont été ajouté à la main. 
+Nous avons vérifié les lignes et les terminus humainement. Les numéros des lignes ont été ajoutés à la main.
 
 ### Trouver le plus court chemin
 Pour trouver le plus court chemin, nous avons utilisé l'algorithme de Dijkstra.
-Nous l'avons simplement implimenter en utilisé les strutures de donnée crée.
+Nous l'avons simplement implémenté en utilisé les structures de donnée crée.
+
 
 ---
 
