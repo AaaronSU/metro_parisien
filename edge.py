@@ -369,10 +369,6 @@ class Edge(object):
             Paramètre:
             ---------
                 direction (str) : ???
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
 
             Retourne : 
                 None 
@@ -391,21 +387,12 @@ class Edge(object):
         """
         Supprime une direction  ????
         Rélève une exception si la direction n'existe pas dans le edge
-<<<<<<< HEAD
 
             Parametre :
                 direction (str) : ??? 
 
             Retourne : 
                 None
-=======
-        ---------
-            Paramètre:
-            ---------
-                direction (str) : ??? 
-
-            Retourne: Aucun retour
->>>>>>> f662777bac116ef2885c24fb989401fc36db61aa
         """
         if direction not in self.direction:
             raise Exception("Direction doesn't exist in edge")
