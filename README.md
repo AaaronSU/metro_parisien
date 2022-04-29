@@ -3,21 +3,48 @@
 Le projet consiste à trouver le plus court chemin entre 2 stations de métro.
 Pour lancer le programme, vous avez besoin des outils suivants :
 - python 3.8 ou ultérieurement
-- pyvis (pour la partie graphique qui va être implementer dans le futur)
+- pyvis (pour la partie graphique qui va être implementée dans le futur)
 
 Pour installer pyvis, il faut que vous ayez l'outil de la gestion des packages python *pip*.
 - https://pip.pypa.io/en/stable/installation/
 - https://pyvis.readthedocs.io/en/latest/install.html
 
-Le fichier que nous avons à disposition:
+Nous avons à disposition le fichier suivant : 
 - metro.txt
 
-Nous avons décidés de séparer notre projet en 2 parties : les structures de données et les fonctions.
+Nous avons décidé de séparer notre projet en 2 parties : les structures de données et les fonctions.
 
-La première partie est écrite en orienté objet et la partie deuxième partie est fonctionnelle.
-Python utilise la programmation orientée objet et la programmation fonctionnelle, ce découpage exploite la diversité du language Python.
+La première partie est écrite en orienté objet et la deuxième partie est fonctionnelle.
+Python utilise la programmation orientée objet et la programmation fonctionnelle, ce découpage exploite la diversité du langage Python.
 
-Dans la documentation nous allons voir d'abord les structures de données que nous avons choisi. Elles ont était implémenté en classe.Puis,les fonctions que nous avons programmé grace à nos structure de données.  Pour finir,nous allons les améliorations que nous pouvons apporter en plus sur le projet.
+Dans la documentation nous allons voir d'abord les structures de données que nous avons choisi. Elles ont était implémenté en classe.Puis,les fonctions que nous avons programmé grâce à nos structure de données. Pour finir, nous allons voir les améliorations que nous pouvons apporter en plus sur le projet.
+
+
+# Sommaire
+
+- [Structure des données](#structure-de-données)
+    - [Graph](#graph)<br>
+    - [Node](#node)<br>
+    - [Edge](#edge)<br>
+    - [Line](#line)<br>
+<br>
+
+- [Fonctions principales](#fonctions-principales)
+    - [Initialiser le graphe](#initialiser-le-graphe)<br>
+    - [Vérifier la connexité](#vérifier-la-connexité)<br>
+    - [Trouver les lignes avec les stations de métro associées](#trouver-les-lignes-avec-les-stations-de-métro-associées)<br>
+    - [Trouver les terminus des lignes](#trouver-les-terminus-des-lignes)<br>
+    - [Trouver le plus court chemin](#trouver-le-plus-court-chemin)<br>
+
+<br>
+
+- [Améliorations possibles](#améliorations-possibles)
+    - [Stockage dans une base de données](#stockage-dans-une-base-de-données)<br>
+    - [Compléter les stations manquantes du métro parisien](#compléter-les-stations-manquantes-du-métro-parisien)<br>
+    - [Affichage graphique des sommets avec la librairie externe pyvis](#affichage-graphique-des-sommets-avec-la-librairie-externe-pyvis)
+    
+<br>
+
 ---
 ## Structure de données
 Notre structure de données est constitué de 4 classes : graph, node, line, edge.
@@ -227,7 +254,7 @@ De même que les terminus sont ajoutés par la fonction add_terminus() et suppri
 
 ---
 
-## Fonctions principale
+## Fonctions principales
 
 ### Initialiser le graphe
 Pour initialiser le graphe, nous avons fait une fonction pour extraire les données dans metro.txt et les stocker dans notre graphe.
@@ -268,4 +295,51 @@ Nous l'avons simplement implimenter en utilisé les strutures de donnée crée.
 La structure des données de notre programme permet de stocker de manière intuitive les informations dans une base de données grâce à une technique appelée ORM.
 ### Compléter les stations manquantes du métro parisien
 Il y a des informations manquantes dans le projet. Comme la date de création du métro.txt date, il y a des stations de métro qui ont apparu entre temps.
+Le code ci-dessous représente les stations des métros manquantes.
+
+```json
+{
+    "12": {
+        "stations": [
+            "Front Populaire"
+        ]
+    },
+    "13": {
+        "stations": [
+            "Les Agnettes"
+        ]
+    },
+    "14": {
+        "stations": [
+            "Mairie de Saint-Ouen",
+            "Saint-Ouen",
+            "Porte de Clichy",
+            "Pont Cardinet",
+            "Saint-Lazare",
+            "Olympiades"
+        ]
+    },
+    "4": {
+        "stations": [
+            "Mairie de Montrouge",
+            "Barbara",
+            "Bagneux - Lucie Aubrac"
+        ]
+    },
+    "8": {
+        "name": "M\u00e9tro 8",
+        "stations": [
+            "Creteil-Pointe du Lac"
+        ]
+    }
+}
+```
+
 ### Affichage graphique des sommets avec la librairie externe *pyvis*
+L'example qui n'est pas fini donc nous avons décidé de ne pas mettre tous de suite le code sur github.
+
+L'image du plan des lignes de métro.
+![](img/pyvis-plan.png)
+
+L'image sur une zone du métro.
+![](img/pyvis-zone.png)
