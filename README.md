@@ -1,11 +1,10 @@
 # metro_parisien
 
-<<<<<<< HEAD
 Le projet consiste à trouver le plus court chemin entre 2 stations des lignes de métro.
 
 Pour lancer le programme, vous avez besoin des outils suivants :
 - python 3.8 ou ultérieurement
-- pyvis (pour la partie graphique qui va implementer dans le futur)
+- pyvis (pour la partie graphique qui va être implementer dans le futur)
 
 Pour installer pyvis, il faut que vous ayez l'outil de la gestion des packages python *pip*.
 - https://pip.pypa.io/en/stable/installation/
@@ -64,7 +63,3 @@ La structure des données de notre programme permet de stocker de manière intui
 ### Compléter les stations manquantes du métro parisien
 Il y a des informations manquantes dans le projet. Comme la date de création du métro.txt date, il y a des stations de métro qui ont apparu entre temps.
 ### Affichage graphique des sommets avec la librairie externe *pyvis*
-=======
-
-####
->>>>>>> f662777bac116ef2885c24fb989401fc36db61aa
