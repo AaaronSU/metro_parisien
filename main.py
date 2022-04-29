@@ -353,13 +353,13 @@ def get_station(message: str) -> int:
     """
     clear()
     if message == "départ":
-        msg_ask_line = "Quelle est la ligne que vous êtes actuellement ?\n"
+        msg_ask_line = "Sur quel ligne de métro êtes-vous actuellement?\n"
         msg_print_line = "Vous êtes actuellement à la ligne"
-        msg_ask_station = "Quelle est la station que vous êtes actuellement ? (Veuillez sélectionner un numéro)\n"
+        msg_ask_station = "Dans quel station êtes-vous ? (Veuillez sélectionner un numéro)\n"
     else:
-        msg_ask_line = "Quelle est la ligne que vous voulez y aller ?\n"
+        msg_ask_line = "Sur quel ligne de métro se trouve votre arrêt (veuillez écrire juste le numero de la ligne) ?\n"
         msg_print_line = "Vous voulez allé à la ligne"
-        msg_ask_station = "Quelle est la station que vous voulez allez ? (Veuillez sélectionner un numéro)\n"
+        msg_ask_station = "A quel station voulez vous aller ? (Veuillez sélectionner un numéro)\n"
     line_number = ask_line_number(msg_ask_line)
     station_number = ask_station_number(
         line_number, msg_print_line, msg_ask_station)
