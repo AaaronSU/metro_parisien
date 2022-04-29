@@ -109,7 +109,6 @@ class Graph:
             Retourne: Aucun retour
         """
         if number_of_node in self:
-            self.number_of_node -= 1
             return self.node_list.pop(number_of_node)
         raise Exception("Node not exist in Graph")
 

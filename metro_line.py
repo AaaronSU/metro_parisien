@@ -53,7 +53,6 @@ class Line(object):
             Paramètre: Aucun paramètre nécessaire
 
             Retourne:
-            --------
                 numero (int): numero de la ligne
         """
         return self.numero
@@ -63,7 +62,6 @@ class Line(object):
         Setter numero (changer le numero de la ligne)
 
             Paramètre:
-            --------
                 numero (int): nouveau numero de la ligne 
 
             Retourne: Aucun retour
@@ -73,36 +71,26 @@ class Line(object):
     def get_color(self) -> str:
         """
         Getter color (obtenir couleur de la ligne)
-        --------
+
             Paramètre: Aucun paramètre nécessaire
 
             Retourne:
-            --------
-                color (str) : couleur de la ligne de métro
+                self.color (str) : couleur de la ligne de métro
         """
         return self.color
 
     def set_color(self, color: str) -> NoReturn:
-        """
-        Setter color (changer couleur de la ligne)
-        --------
-            Paramètre:
-            --------
-                color (str): nouvelle couleur de la ligne de métro
-
-            Retourne: Aucun retour 
-        """
         self.color = color
 
     def get_nodes(self) -> List[int]:
         """
         Getter nodes (obtenir les stations (Node), par leur identifiant, de la ligne de métro)
-        --------
-            Paramètre: Aucun paramètre nécessaire
+
+            Parametre: 
+                None 
 
             Retourne:
-            --------
-                node_list.keys (List[int]): Liste des identifiants des stations (Node) de la ligne de métro
+                self.node_list.keys (List[int]) : Liste des identifiants des stations (Node) de la ligne de métro
         """
         return self.node_list.keys()
 
@@ -111,13 +99,11 @@ class Line(object):
         Si noeud, ayant pour identifiant number_of_node, dans ligne alors retourne le noeud et la liste 
         Sinon, retourne None
 
-            Paramètre:
-            -------- 
-                number_of_node: Identifiant du noeud (node) cherché
-            
+            Parametre : 
+                number_of_node : Identifiant du noeud (node) cherché
+
             Retourne:
-            --------
-                node_list[number_of_node] : 
+                self.node_list[number_of_node]
         """
         if number_of_node in self.get_nodes():
             return self.node_list[number_of_node]
@@ -138,30 +124,12 @@ class Line(object):
         return self.node_list.pop(number_of_node)
 
     def get_number_of_node(self) -> int:
-        """
-        Getter number_of_node (le nombre de station de la ligne)
-        --------
-            Paramètre: Aucun paramètre nécessaire
-
-            Retourne:
-            --------
-                number_of_node (int): numero de la ligne
-        """
         return self.number_of_node
 
     def set_number_of_node(self, number_of_node: int) -> NoReturn:
         self.number_of_node = number_of_node
 
     def get_terminus_nodes(self) -> List[Node]:
-        """
-        Getter numero (obtenir le numero de la ligne)
-        --------
-            Paramètre: Aucun paramètre nécessaire
-
-            Retourne:
-            --------
-                numero (int): numero de la ligne
-        """
         return self.terminus.values()
 
     def get_terminus_number(self) -> List[int]:
