@@ -45,6 +45,8 @@ Dans la documentation nous allons voir d'abord les structures de données que no
     
 <br>
 
+![](img/metro_parisien.webp)
+
 ---
 ## Structure de données
 Notre structure de données est constitué de 4 classes : graph, node, line, edge.
