@@ -4,7 +4,7 @@ from node import Node
 
 class Edge(object):
     """
-    Class qui représente un Edge (arrête)
+    Class qui représente un Edge (arête)
     Liaison entre deux stations de ligne de métro
     --------
 
