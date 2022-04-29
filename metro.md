@@ -1,5 +1,10 @@
 ## Graph
 
+Cette class permet d'initialisé un graphe vide. 
+Le graphe à des noeuds et des 
+
+#### Attributs
+
 + number_of_node: int
 + node_list: Mapping[int, Node]
 ---
@@ -19,11 +24,20 @@
 
 ## Node
 
+Un noeud est une station de métro.
+Les attributs id, name et predecessor sont dû au fichier (metro.txt) utilisé pour notre projet.
+Chaque station de métro possède un identifiant unique afin de le reconnaite. 
+Le nom n'est pas unique. Les stations de métro ayant des noms 
+
+#### Attributs
+
+Chaque noeuds 
+
 + id: int
 + name: str
 + color: str
 + predecessor: Optional[str]
-+ distance: int
++ line : str
 + connectedTo: Mapping[int, Node]
 ---
 + get_id(): int
@@ -38,8 +52,8 @@
 + get_predecessor(): Optional[str]
 + set_predecessor(predecessor: str)
 
-+ get_distance(): int
-+ set_distance(distance: int)
++ get_line(): Optional[str]
++ set_line(line: str)
 
 + get_connections(): List[int]
 + add_connection(number_of_node: int, connection: Node)

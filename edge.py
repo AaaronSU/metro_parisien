@@ -4,9 +4,11 @@ from node import Node
 
 class Edge(object):
     """
-    Class qui représente un Edge (une liaison entre deux noeuds : une arrête)
+    Class qui représente un Edge (arrête)
+    Liaison entre deux stations de ligne de métro
     --------
 
+<<<<<<< HEAD
     Attribut de la class Edge :
 
     edge_list: List
@@ -22,6 +24,23 @@ class Edge(object):
     weight: int
         Poids de la liaison : distance entre les deux noeuds
     direction: None ou List[str]
+=======
+    Attribut de la class Edge:
+    ---------
+        edge_list: List
+            Liste de tous les instances de la class Edge crée
+
+    Attributs: 
+    ---------
+        starting_node: Node
+            Station de départ
+        arrival_node: Node
+            Station d'arrivé
+        weight: int
+            Poids de la liaison: distance entre deux stations
+        direction: None ou List[str]
+            ?????? 
+>>>>>>> f662777bac116ef2885c24fb989401fc36db61aa
     """
 
     edge_list: List = []
@@ -29,7 +48,7 @@ class Edge(object):
     def __init__(self, starting_node: Node, arrival_node: Node, weight: int, direction: Optional[str] = None):
         """
         Constructeur de la class Edge
-        Rélève une execption si starting_node et arrival_node ne sont pas des instances de la class Node
+        Rélève une exception si starting_node et arrival_node ne sont pas des instances de la class Node
         """
         if (not isinstance(starting_node, Node)) or (not isinstance(arrival_node, Node)):
             raise Exception("Invalid node for initialization")
@@ -41,26 +60,26 @@ class Edge(object):
 
     def get_starting_node(self) -> Node:
         """
-        Getteur starting_node
+        Getter starting_node (obtenir station de départ du edge)
+        ---------
+            Paramètre: Aucun paramètre nécessaire
 
-            Parametre :
-                None 
-
-            Retourne :
-                self.starting_node (Node) : Noeud de départ 
+            Retourne:
+            ---------
+                starting_node (Node): station de départ 
         """
         return self.starting_node
 
     def set_starting_node(self, node: Node) -> NoReturn:
         """
-        Setteur starting_node
+        Setter starting_node (changer station de départ du edge)
         Rélève une exception si starting_node n'est pas une instance de la class Node
+        ---------
+            Paramètre:
+            ---------
+                starting_node (Node): Nouveau noeud de départ
 
-            Parametre :
-                starting_node (Node) : Nouveau noeud de départ
-
-            Retourne : 
-                None
+            Retourne: Aucun retour
         """
         if not isinstance(node, Node):
             raise Exception("Invalid node")
@@ -68,26 +87,26 @@ class Edge(object):
 
     def get_arrival_node(self) -> Node:
         """
-        Getteur arrival_node
+        Getter arrival_node (obtenir station d'arrivé du edge)
+        ---------
+            Paramètre: Aucun paramètre nécessaire
 
-            Parametre :
-                None 
-
-            Retourne :
-                self.arrival_node (Node) : Noeud d'arrivé
+            Retourne:
+            ---------
+                arrival_node (Node): Station d'arrivé
         """
         return self.arrival_node
 
     def set_arrival_node(self, node: Node) -> NoReturn:
         """
-        Setteur arrival_node
+        Setter arrival_node (changer station d'arrivé du edge)
         Rélève une exception si starting_node n'est pas une instance de la class Node
 
-            Parametre :
-                arrival_node (Node) : Nouveau noeud d'arrivé
+            Paramètre:
+            ---------
+                arrival_node (Node): Nouvelle station d'arrivé
 
-            Retourne : 
-                None
+            Retourne: Aucun retour
         """
         if not isinstance(node, Node):
             raise Exception("Invalid node")
@@ -95,50 +114,56 @@ class Edge(object):
 
     def get_weight(self) -> int:
         """
-        Getteur weight
+        Getter weight (obtenir poid du edge)
+        ---------
+            Paramètre: Aucun paramètre necéssaire
 
-            Parametre :
-                None 
-
-            Retourne :
-                self.weight (int) : Poids du edge, distance entre deux noeuds
+            Retourne:
+            ---------
+                weight (int): Poids du edge, distance entre deux stations.
         """
         return self.weight
 
     def set_weight(self, weight: int) -> NoReturn:
         """
-        Setteur weight
+        Setter weight (changer poid du edge)
+        ---------
+            Paramètre:
+            ---------
+                weight (int): Nouveau poids du edge, distance entre deux noeuds
 
-            Parametre :
-                self.weight (int) : Nouveau poids du edge, distance entre deux noeuds
-
-            Retourne :
-                None
+            Retourne: Aucun retour
         """
         self.weight = weight
 
     def get_direction(self) -> str:
         """
-        Getteur direction
+        Getter direction (obtenir direction du edge)
+        ---------
+            Paramètre: Aucun paramètre
 
-            Parametre :
-                None 
-
-            Retourne :
-                self.direction (str) :  ???
+            Retourne:
+            ---------
+                direction (str) :  ???
         """
         return self.direction
 
     def add_direction(self, direction: str) -> NoReturn:
         """
-        S'il n'y a aucune ????
+        ????
         ??? 
-
-            Parametre :
+        ---------
+            Paramètre:
+            ---------
                 direction (str) : ???
+<<<<<<< HEAD
 
             Retourne : 
                 None 
+=======
+            
+            Retourne: Aucun retour
+>>>>>>> f662777bac116ef2885c24fb989401fc36db61aa
         """
         if not self.direction:
             self.direction = [direction]
@@ -149,12 +174,21 @@ class Edge(object):
         """
         Supprime une direction  ????
         Rélève une exception si la direction n'existe pas dans le edge
+<<<<<<< HEAD
 
             Parametre :
                 direction (str) : ??? 
 
             Retourne : 
                 None
+=======
+        ---------
+            Paramètre:
+            ---------
+                direction (str) : ??? 
+            
+            Retourne: Aucun retour
+>>>>>>> f662777bac116ef2885c24fb989401fc36db61aa
         """
         if direction not in self.direction:
             raise Exception("Direction doesn't exist in edge")
@@ -163,7 +197,20 @@ class Edge(object):
     @classmethod
     def get_connection_between_nodes(cls, start_node: Node, end_node: Node) -> Any:
         """
+<<<<<<< HEAD
 
+=======
+        Prends deux noeuds et renvoie la liaison entre les deux
+        ---------
+            Paramètre: 
+            ---------
+                start_node (Node):
+                end_node (Node):
+            
+            Retourne:
+            ---------
+                edge (Edge): instance de la class Edge correcpondant
+>>>>>>> f662777bac116ef2885c24fb989401fc36db61aa
         """
         for edge in Edge.get_edge_list():
             if edge.starting_node == start_node and edge.arrival_node == end_node:
@@ -171,6 +218,17 @@ class Edge(object):
 
     @classmethod
     def get_connections_of_node(cls, node: Node) -> List[Tuple[Node, int, Optional[str]]]:
+        """
+        ??????
+        ---------
+            Paramètre: 
+            ---------
+                node (Node): ????
+            
+            Retourne:
+            ---------
+                list_connection (List[Tuple[Node, int, Optional[str]]]) : ???
+        """
         list_connection = []
         for edge in cls:
             if edge.starting_node == node:
