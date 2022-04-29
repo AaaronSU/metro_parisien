@@ -88,7 +88,7 @@ def is_connexe(graph: Graph):
     return True
 
 
-def dijkstra(graph: Graph, start_node: int):
+def dijkstra(graph: Gra*ph, start_node: int):
     dico = {node.get_id(): float('inf') for node in graph}
     dico[start_node] = 0
 
